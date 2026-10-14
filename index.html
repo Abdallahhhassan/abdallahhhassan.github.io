@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}body{margin:0}img{max-width:100%}</style>
 <title>Abdallah Hassan</title>
-<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>document.documentElement.classList.add('js-reveal');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315201b'/%3E%3Cpath d='M20 44C34 44 30 20 44 20' fill='none' stroke='%239fb0a8' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='44' r='8' fill='%232f6fd6'/%3E%3Ccircle cx='44' cy='20' r='8' fill='%23d4572a'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Abdallah Hassan, full-stack engineer in Cairo. TypeScript, React, Node.js and LLM-powered products.">
@@ -201,6 +201,17 @@ a.channel[download]:hover .arrow { transform: translateY(2px); }
   .btn:hover, .theme-btn:hover, a.channel:hover, a.channel:hover .arrow { transform: none; }
   .theme-anim, .theme-anim * { transition: none !important; }
   .theme-anim .theme-btn svg { animation: none; }
+}
+
+/* ---------- scroll reveal ---------- */
+.js-reveal .reveal { opacity: 0; transform: translateY(22px); }
+.js-reveal .reveal.in {
+  opacity: 1; transform: none;
+  transition: opacity .8s ease, transform .9s cubic-bezier(.2, .7, .3, 1);
+  transition-delay: var(--d, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal, .js-reveal .reveal.in { opacity: 1; transform: none; transition: none; }
 }
 
 @media (max-width: 760px) {
@@ -516,6 +527,59 @@ a.channel[download]:hover .arrow { transform: translateY(2px); }
     });
     if (mq.addEventListener) mq.addEventListener('change', sync);
     sync();
+  })();
+
+  // Fade content up as it scrolls into view.
+  (function () {
+    var root = document.documentElement;
+    if (!('IntersectionObserver' in window)) { root.classList.remove('js-reveal'); return; }
+    var els = document.querySelectorAll('.hero .role, .hero h1, .hero .lede, .hero .links, .hero figure, section .eyebrow, section h2, .project, .note, .timeline .row, .stack > div, .workflow, .contact > p, .channel');
+    var io = new IntersectionObserver(function (entries) {
+      var k = 0;
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target, d = Math.min(k++, 5) * 0.08;
+        el.style.setProperty('--d', d + 's');
+        el.classList.add('in');
+        io.unobserve(el);
+        // Hand the element back to its normal styles once it has settled.
+        setTimeout(function () { el.classList.remove('reveal', 'in'); el.style.removeProperty('--d'); }, 1000 + d * 1000);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    els.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+  })();
+
+  // Heavier, eased wheel scrolling. Touch and keyboard scrolling stay native.
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var root = document.documentElement, target = window.scrollY, cur = target, raf = 0, ease = 0.06;
+    function maxY() { return root.scrollHeight - window.innerHeight; }
+    function tick() {
+      cur += (target - cur) * ease;
+      if (Math.abs(target - cur) < 0.5) cur = target;
+      window.scrollTo({ top: cur, behavior: 'instant' });
+      raf = cur !== target ? requestAnimationFrame(tick) : 0;
+    }
+    function go(y) {
+      target = Math.max(0, Math.min(maxY(), y));
+      if (!raf) { cur = window.scrollY; raf = requestAnimationFrame(tick); }
+    }
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      var d = e.deltaY * (e.deltaMode === 1 ? 40 : e.deltaMode === 2 ? window.innerHeight : 1);
+      go((raf ? target : window.scrollY) + d);
+    }, { passive: false });
+    window.addEventListener('scroll', function () { if (!raf) target = cur = window.scrollY; }, { passive: true });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var el = document.querySelector(a.getAttribute('href'));
+      if (!el) return;
+      e.preventDefault();
+      go(el.getBoundingClientRect().top + window.scrollY - 16);
+      history.replaceState(null, '', a.getAttribute('href'));
+    });
   })();
 </script>
 

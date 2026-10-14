@@ -180,6 +180,29 @@ a.channel:hover .arrow { color: var(--accent-ink); }
 
 footer { padding-block: 26px 40px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
 
+/* ---------- motion ---------- */
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 16px; }
+.btn, .theme-btn, a.channel, .top nav a, .project .live, .channel .arrow {
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .3s cubic-bezier(.2, .7, .3, 1);
+}
+.btn:hover, .theme-btn:hover { transform: translateY(-1px); }
+.btn:active, .theme-btn:active { transform: scale(.97); transition-duration: .1s; }
+a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba(0, 0, 0, .45); }
+a.channel:hover .arrow { transform: translate(2px, -2px); }
+a.channel[download]:hover .arrow { transform: translateY(2px); }
+.theme-anim, .theme-anim *, .theme-anim *::before, .theme-anim *::after {
+  transition: background-color .4s ease, color .4s ease, border-color .4s ease, fill .4s ease, stroke .4s ease !important;
+}
+.theme-anim .theme-btn svg { animation: icon-in .45s cubic-bezier(.2, .7, .3, 1); }
+@keyframes icon-in { from { opacity: 0; transform: rotate(-90deg) scale(.5); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn:hover, .theme-btn:hover, a.channel:hover, a.channel:hover .arrow { transform: none; }
+  .theme-anim, .theme-anim * { transition: none !important; }
+  .theme-anim .theme-btn svg { animation: none; }
+}
+
 @media (max-width: 760px) {
   .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 20px 40px; }
   .project { grid-template-columns: minmax(0, 1fr); gap: 10px; }
@@ -484,6 +507,9 @@ footer { padding-block: 26px 40px; font-family: var(--font-mono); font-size: 12p
     }
     btn.addEventListener('click', function () {
       var t = isDark() ? 'light' : 'dark';
+      root.classList.add('theme-anim');
+      clearTimeout(window.__themeT);
+      window.__themeT = setTimeout(function () { root.classList.remove('theme-anim'); }, 500);
       root.dataset.theme = t;
       try { localStorage.setItem('theme', t); } catch (e) {}
       sync();

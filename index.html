@@ -139,6 +139,7 @@ h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.025e
 
 .stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 40px; }
 .stack h4 { margin: 0 0 8px; font-size: 0.95rem; font-weight: 600; }
+.stack .wide { grid-column: 1 / -1; order: 1; }
 
 .contact { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
 .contact > p { margin: 0; color: var(--ink-2); max-width: 30em; font-size: 1.05rem; }
@@ -276,7 +277,7 @@ footer { padding-block: 26px 40px; font-family: var(--font-mono); font-size: 12p
           <li>Built the dataset mapping grid used to test workflows, with type mismatch detection and preprocessing functions, plus the flow for running evaluations against a dataset.</li>
           <li>Added a filter agent node, resumable uploads for large dataset files, and live updates over SignalR for AI-generated workflow descriptions.</li>
         </ul>
-        <div class="chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">React Flow</span><span class="chip">Zustand</span><span class="chip">TanStack Query</span><span class="chip">SignalR</span></div>
+        <div class="chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">React Flow</span><span class="chip">Zustand</span><span class="chip">ShadCN</span><span class="chip">TanStack Query</span><span class="chip">SignalR</span></div>
       </div>
     </article>
 
@@ -398,9 +399,10 @@ footer { padding-block: 26px 40px; font-family: var(--font-mono); font-size: 12p
     <p class="eyebrow">Tools</p>
     <h2>What I work with</h2>
     <div class="stack">
-      <div><h4>Frontend</h4><div class="chips"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Angular</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span><span class="chip">Spartan UI</span></div></div>
+      <div><h4>Frontend</h4><div class="chips"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Angular</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span></div></div>
+      <div><h4>UI libraries</h4><div class="chips"><span class="chip">ShadCN</span><span class="chip">Spartan UI</span><span class="chip">PrimeNG</span><span class="chip">Angular Material</span><span class="chip">Bootstrap</span></div></div>
       <div><h4>Backend and data</h4><div class="chips"><span class="chip">Node.js</span><span class="chip">.NET</span><span class="chip">Python</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span></div></div>
-      <div><h4>AI</h4><div class="chips"><span class="chip">OpenAI</span><span class="chip">Anthropic</span><span class="chip">multi-agent orchestration</span><span class="chip">tool calling</span><span class="chip">structured outputs</span><span class="chip">RAG</span><span class="chip">evals</span><span class="chip">MCP</span><span class="chip">prompt and context engineering</span></div></div>
+      <div class="wide"><h4>AI</h4><div class="chips"><span class="chip">OpenAI</span><span class="chip">Anthropic</span><span class="chip">multi-agent orchestration</span><span class="chip">tool calling</span><span class="chip">structured outputs</span><span class="chip">RAG</span><span class="chip">evals</span><span class="chip">MCP</span><span class="chip">prompt and context engineering</span></div></div>
       <div><h4>Cloud</h4><div class="chips"><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Cloudflare</span><span class="chip">CI/CD</span></div></div>
     </div>
     <div class="workflow">

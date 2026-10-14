@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>Abdallah Hassan</title>
+<meta name="description" content="Abdallah Hassan, full-stack engineer in Cairo. TypeScript, React, Node.js and LLM-powered products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600;800&display=swap">
+<style>
+/* Layout: one 1040px column. Hero splits into intro and a live node graph (the
+   graph editor is the signature work), then hairline rows for work, experience
+   and contact. Ports on the graph are color-coded by type, like an editor. */
+:root {
+  --bg: #f1f4f2;
+  --surface: #ffffff;
+  --ink: #15201b;
+  --ink-2: #4a5852;
+  --ink-3: #75837d;
+  --line: #d7dfdb;
+  --accent: #d4572a;
+  --accent-ink: #b0431b;
+  --port-a: #2f6fd6;
+  --port-b: #c18a12;
+  --port-c: #7a4fd0;
+  --edge: #9fb0a8;
+  --font-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1412; --surface: #151d1a; --ink: #e5ece8; --ink-2: #aab8b1; --ink-3: #7f8f88;
+    --line: #26322d; --accent: #f07a4b; --accent-ink: #f59670;
+    --port-a: #6aa0f5; --port-b: #e2b44a; --port-c: #a98af0; --edge: #4c5d56;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1412; --surface: #151d1a; --ink: #e5ece8; --ink-2: #aab8b1; --ink-3: #7f8f88;
+  --line: #26322d; --accent: #f07a4b; --accent-ink: #f59670;
+  --port-a: #6aa0f5; --port-b: #e2b44a; --port-c: #a98af0; --edge: #4c5d56;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: 1040px; margin: 0 auto; }
+
+/* ---------- top bar ---------- */
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  padding-block: 22px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--ink-3);
+}
+.top nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.top nav a { text-decoration: none; color: var(--ink-2); }
+.top nav a:hover { color: var(--accent-ink); }
+
+/* ---------- hero ---------- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 40px; align-items: center;
+  padding-block: 40px 56px;
+  border-bottom: 1px solid var(--line);
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 800; letter-spacing: -0.035em;
+  font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1.02; margin: 0 0 18px;
+  text-wrap: balance;
+}
+.hero .role { font-family: var(--font-mono); font-size: 14px; color: var(--accent-ink); margin: 0 0 14px; letter-spacing: 0.02em; }
+.hero p.lede { font-size: 1.12rem; color: var(--ink-2); max-width: 34em; margin: 0 0 26px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+  font: 500 14px var(--font-body); color: var(--ink); text-decoration: none; cursor: pointer;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+
+.graph { width: 100%; max-width: 100%; height: auto; display: block; }
+.graph .node rect { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; }
+.graph .node.hot rect { stroke: var(--accent); stroke-width: 1.6; }
+.graph .title { font: 600 13px var(--font-body); fill: var(--ink); }
+.graph .sub { font: 400 10.5px var(--font-mono); fill: var(--ink-3); }
+.graph .edge { fill: none; stroke: var(--edge); stroke-width: 1.6; }
+.graph .pulse { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 10 400; animation: flow 3.6s linear infinite; }
+.graph .pa { fill: var(--port-a); } .graph .pb { fill: var(--port-b); } .graph .pc { fill: var(--port-c); }
+.graph .plabel { font: 400 9.5px var(--font-mono); fill: var(--ink-3); }
+.graph-caption { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin: 10px 0 0; }
+@keyframes flow { from { stroke-dashoffset: 410; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .graph .pulse { animation: none; stroke-dasharray: none; opacity: .0; } }
+
+/* ---------- sections ---------- */
+section { padding-block: 52px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.025em; font-size: clamp(1.7rem, 3.2vw, 2.2rem); margin: 0 0 28px; text-wrap: balance; }
+
+.project {
+  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr); gap: 32px;
+  padding-block: 28px; border-top: 1px solid var(--line);
+}
+.project:first-of-type { border-top: 0; padding-top: 4px; }
+.project h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.45rem; letter-spacing: -0.02em; margin: 0 0 4px; }
+.project .meta { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-3); margin: 0 0 12px; }
+.project .live { font: 500 14px var(--font-body); color: var(--accent-ink); text-decoration: none; }
+.project .live:hover { text-decoration: underline; }
+.project .what { margin: 0 0 14px; color: var(--ink); max-width: 38em; }
+.project ul { margin: 0 0 16px; padding-left: 1.1em; color: var(--ink-2); max-width: 38em; }
+.project li { margin-bottom: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 12px; padding: 3px 9px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); }
+.note { font-size: 14px; color: var(--ink-3); margin: 22px 0 0; max-width: 46em; }
+
+.timeline { display: grid; gap: 0; }
+.row {
+  display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px;
+  padding-block: 18px; border-top: 1px solid var(--line);
+}
+.row:first-child { border-top: 0; padding-top: 0; }
+.row .when { font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.row h4 { margin: 0; font-size: 1.05rem; font-weight: 600; }
+.row p { margin: 4px 0 0; color: var(--ink-2); max-width: 44em; }
+
+.stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 40px; }
+.stack h4 { margin: 0 0 8px; font-size: 0.95rem; font-weight: 600; }
+
+.contact { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; justify-content: space-between; }
+.contact p { margin: 0; color: var(--ink-2); max-width: 32em; }
+.email { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.email code { font-family: var(--font-mono); font-size: 15px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); user-select: all; overflow-wrap: anywhere; }
+.copied { font-family: var(--font-mono); font-size: 12px; color: var(--accent-ink); }
+
+.workflow { margin-top: 44px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; }
+.workflow h4 { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+.workflow p { margin: 0; color: var(--ink-2); max-width: 46em; }
+
+footer { padding-block: 26px 40px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-block: 20px 40px; }
+  .project { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .stack { grid-template-columns: minmax(0, 1fr); }
+  .workflow { grid-template-columns: minmax(0, 1fr); }
+  .workflow { gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <span>abdallah hassan · cairo, egypt</span>
+    <nav aria-label="Sections">
+      <a href="#work">work</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="role">full-stack engineer · 3+ years in production</p>
+      <h1>I build web products, lately ones with AI agents inside.</h1>
+      <p class="lede">I take web products from idea to production with TypeScript, React and Node.js. Most of my recent work is on AI products: workflow editors, evaluation tools, and the rules that decide what happens when a model gets something wrong.</p>
+      <div class="links">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="https://www.linkedin.com/in/abdallahhhassan/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Abdallahhhassan" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <figure style="margin:0">
+      <svg class="graph" viewBox="0 0 460 330" role="img" aria-labelledby="gTitle">
+        <title id="gTitle">An agent output passing through reliability rules, which either send it to the next step or route it to a fallback</title>
+        <!-- edges -->
+        <path id="e1" class="edge" d="M150 66 C 190 66, 190 66, 230 66"/>
+        <path id="e2" class="edge" d="M380 82 C 410 82, 410 150, 380 150 L 360 150"/>
+        <path id="e3" class="edge" d="M230 166 C 180 166, 180 250, 150 250"/>
+        <path id="e4" class="edge" d="M300 196 C 300 226, 300 230, 300 236"/>
+        <path class="pulse" d="M150 66 C 190 66, 190 66, 230 66 M380 82 C 410 82, 410 150, 380 150 L 360 150 M230 166 C 180 166, 180 250, 150 250"/>
+
+        <!-- node: request -->
+        <g class="node" transform="translate(16 36)">
+          <rect width="134" height="60" rx="8"/>
+          <text class="title" x="14" y="26">Workflow input</text>
+          <text class="sub" x="14" y="44">form · dataset</text>
+          <circle class="pa" cx="134" cy="30" r="5"/>
+        </g>
+        <!-- node: llm call -->
+        <g class="node hot" transform="translate(230 36)">
+          <rect width="150" height="60" rx="8"/>
+          <text class="title" x="14" y="26">Agent step</text>
+          <text class="sub" x="14" y="44">LLM · code · filter</text>
+          <circle class="pa" cx="0" cy="30" r="5"/>
+          <circle class="pb" cx="150" cy="46" r="5"/>
+          <text class="plabel" x="104" y="76">output</text>
+        </g>
+        <!-- node: validate -->
+        <g class="node" transform="translate(230 136)">
+          <rect width="130" height="60" rx="8"/>
+          <text class="title" x="14" y="26">Reliability rules</text>
+          <text class="sub" x="14" y="44">built-in · custom</text>
+          <circle class="pb" cx="130" cy="14" r="5"/>
+          <circle class="pc" cx="0" cy="30" r="5"/>
+          <circle class="pb" cx="70" cy="60" r="5"/>
+        </g>
+        <!-- node: retry / fallback -->
+        <g class="node" transform="translate(230 236)">
+          <rect width="150" height="60" rx="8"/>
+          <text class="title" x="14" y="26">Fallback route</text>
+          <text class="sub" x="14" y="44">reroute · alert</text>
+          <circle class="pb" cx="70" cy="0" r="5"/>
+          <text class="plabel" x="82" y="-8">rule failed</text>
+        </g>
+        <!-- node: user -->
+        <g class="node" transform="translate(16 220)">
+          <rect width="134" height="60" rx="8"/>
+          <text class="title" x="14" y="26">Next step</text>
+          <text class="sub" x="14" y="44">checked output</text>
+          <circle class="pc" cx="134" cy="30" r="5"/>
+          <text class="plabel" x="86" y="76">passed</text>
+        </g>
+      </svg>
+      <figcaption class="graph-caption">How reliability rules route an agent's output in Action AI. I built much of the front end for setting them up.</figcaption>
+    </figure>
+  </div>
+
+
+  <section id="work">
+    <p class="eyebrow">Work</p>
+    <h2>Selected projects</h2>
+
+    <article class="project">
+      <div>
+        <h3>Action AI</h3>
+        <p class="meta">enterprise · AI automation</p>
+        <a class="live" href="https://www.actionai.co/" target="_blank" rel="noopener">actionai.co ↗</a>
+      </div>
+      <div>
+        <p class="what">A low-code platform where teams build multi-agent AI workflows by connecting nodes on a canvas, then test and run them on real data.</p>
+        <ul>
+          <li>Built the graph-based workflow editor, where each node carries its own configuration and typed input and output ports, and incompatible connections are blocked while dragging.</li>
+          <li>Built the front end for the platform's reliability rules: built-in and custom rules, regex classifiers and routing, which decide what happens when an agent's output fails a check, including email alerts on exceptions.</li>
+          <li>Built the dataset mapping grid used to test workflows, with type mismatch detection and preprocessing functions, plus the flow for running evaluations against a dataset.</li>
+          <li>Added a filter agent node, resumable uploads for large dataset files, and live updates over SignalR for AI-generated workflow descriptions.</li>
+        </ul>
+        <div class="chips"><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">React Flow</span><span class="chip">Zustand</span><span class="chip">TanStack Query</span><span class="chip">SignalR</span></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Mosadad</h3>
+        <p class="meta">insurance · claims · full stack</p>
+        <a class="live" href="https://www.mosadad.org/" target="_blank" rel="noopener">mosadad.org ↗</a>
+      </div>
+      <div>
+        <p class="what">An accident recovery and insurance claims system covering the whole claim lifecycle, from submission through recovery.</p>
+        <ul>
+          <li>Delivered the full stack under strict data integrity and role-based access requirements.</li>
+          <li>Structured the .NET backend around CQRS and MediatR, separating read and write paths where auditability mattered.</li>
+          <li>Built the Angular front end with RxJS and Signals.</li>
+        </ul>
+        <div class="chips"><span class="chip">.NET</span><span class="chip">Angular</span><span class="chip">RxJS</span><span class="chip">CQRS</span></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Eddie's Portal</h3>
+        <p class="meta">events · booking · full stack</p>
+        <a class="live" href="https://eddies-entertainment.com/" target="_blank" rel="noopener">eddies-entertainment.com ↗</a>
+      </div>
+      <div>
+        <p class="what">An events and booking platform for venues, talents and shows.</p>
+        <ul>
+          <li>Built search, filtering, media carousels and a multi-step booking request flow.</li>
+          <li>Wrote Python backend services with transactional email, deployed on Cloudflare Pages, D1 and R2.</li>
+        </ul>
+        <div class="chips"><span class="chip">React</span><span class="chip">Python</span><span class="chip">Cloudflare</span><span class="chip">Resend</span></div>
+      </div>
+    </article>
+
+    <!-- Edara: hidden for now, remove these comment markers to show it again.
+    <article class="project">
+      <div>
+        <h3>Edara</h3>
+        <p class="meta">knowledge platform · front end</p>
+        <a class="live" href="https://www.edara.com/home" target="_blank" rel="noopener">edara.com ↗</a>
+      </div>
+      <div>
+        <p class="what">One of the leading book summary services in the MENA region, with 10,000+ text and audio summaries in several languages.</p>
+        <ul>
+          <li>Created the reader used for every summary on the platform.</li>
+          <li>Integrated PDF and EPUB rendering with ePub.js, text-to-speech playback and graphic book support.</li>
+          <li>Handled right-to-left layouts so Arabic content reads naturally.</li>
+        </ul>
+        <div class="chips"><span class="chip">React</span><span class="chip">ePub.js</span><span class="chip">text to speech</span><span class="chip">RTL</span></div>
+      </div>
+    </article>
+    -->
+
+    <article class="project">
+      <div>
+        <h3>RakMun</h3>
+        <p class="meta">mobile · iOS and Android</p>
+      </div>
+      <div>
+        <p class="what">A cross-platform mobile app shipped to both app stores.</p>
+        <ul>
+          <li>Built the app in React Native and Expo, with a Node.js and MongoDB backend for authentication, data and API integration.</li>
+          <li>Ran sprint planning, task breakdown and delivery tracking as Scrum Master for a 5-person team, alongside hands-on development.</li>
+        </ul>
+        <div class="chips"><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Traffic recognition</h3>
+        <p class="meta">computer vision · graduation project</p>
+      </div>
+      <div>
+        <p class="what">Real-time detection of vehicles, pedestrians and traffic signals for driver assistance.</p>
+        <ul>
+          <li>Trained a YOLOv3-Tiny model running at 30+ FPS, with lane and crosswalk detection at 94% accuracy.</li>
+          <li>Served live detections through Flask and Node.js APIs to a React front end on AWS.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">YOLO</span><span class="chip">Flask</span><span class="chip">AWS EC2</span></div>
+      </div>
+    </article>
+
+    <p class="note">These are client and company products, so their code lives in private repos. Open source: <a href="https://github.com/agentvivekkumar/dontbemichael/pull/369" target="_blank" rel="noopener">dontbemichael #369</a>, per-column empty states for a multi-agent desktop app.</p>
+  </section>
+
+  <section id="experience">
+    <p class="eyebrow">Experience</p>
+    <h2>Where I've worked</h2>
+    <div class="timeline">
+      <div class="row">
+        <div class="when">Oct 2023 to now</div>
+        <div>
+          <h4>Software Developer (Full-Stack), Julfar Consultancy Services</h4>
+          <p>Ras Al Khaimah, UAE. Own features end to end across frontend, backend and AI layers on three production platforms, with teams of 7+ engineers.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">Sep 2021 to Jan 2022</div>
+        <div>
+          <h4>AI Engineering Intern, Samsung Innovation Campus</h4>
+          <p>Machine learning and deep learning for computer vision with Python and TensorFlow. Finished in the top 3 of the cohort.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="when">Education</div>
+        <div>
+          <h4>B.Sc. Software Engineering, Cairo University</h4>
+          <p>Faculty of Computers and Artificial Intelligence. GPA 3.47, with honors, ranked 6th.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <p class="eyebrow">Tools</p>
+    <h2>What I work with</h2>
+    <div class="stack">
+      <div><h4>Frontend</h4><div class="chips"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Angular</span><span class="chip">React Native</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span></div></div>
+      <div><h4>Backend and data</h4><div class="chips"><span class="chip">Node.js</span><span class="chip">.NET</span><span class="chip">Python</span><span class="chip">PostgreSQL</span><span class="chip">MongoDB</span></div></div>
+      <div><h4>AI</h4><div class="chips"><span class="chip">OpenAI</span><span class="chip">Anthropic</span><span class="chip">agentic workflows</span><span class="chip">MCP</span><span class="chip">RAG</span></div></div>
+      <div><h4>Cloud</h4><div class="chips"><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Cloudflare</span><span class="chip">CI/CD</span></div></div>
+    </div>
+    <div class="workflow">
+      <h4>In my own work</h4>
+      <p>I use Claude Code and other coding agents every day, for reviewing an architecture before I commit to it and for tracing bugs as much as for writing code. I set up MCP servers so agents work from real context instead of guessing, and I review every line they produce.</p>
+    </div>
+  </section>
+
+  <section id="contact" style="border-bottom:0">
+    <p class="eyebrow">Contact</p>
+    <h2>Let's talk</h2>
+    <div class="contact">
+      <p>I'm open to remote full-stack and AI engineering roles. The fastest way to reach me is email or LinkedIn.</p>
+      <div class="email">
+        <code id="addr">abdullahhassan436@gmail.com</code>
+        <button class="btn" id="copy" type="button">Copy email</button>
+        <span class="copied" id="copied" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Abdallah Hassan · Cairo, Egypt</footer>
+</div>
+
+<script>
+  document.getElementById('copy').addEventListener('click', function () {
+    var text = document.getElementById('addr').textContent;
+    var out = document.getElementById('copied');
+    function selectIt() {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      out.textContent = 'Selected, press Ctrl+C';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { out.textContent = 'Copied'; }, selectIt);
+    } catch (e) { selectIt(); }
+  });
+</script>
+
+</body>
+</html>

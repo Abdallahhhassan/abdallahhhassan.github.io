@@ -533,7 +533,7 @@ a.channel[download]:hover .arrow { transform: translateY(2px); }
   (function () {
     var root = document.documentElement;
     if (!('IntersectionObserver' in window)) { root.classList.remove('js-reveal'); return; }
-    var els = document.querySelectorAll('.hero .role, .hero h1, .hero .lede, .hero .links, .hero figure, section .eyebrow, section h2, .project, .note, .timeline .row, .stack > div, .workflow, .contact > p, .channel');
+    var els = document.querySelectorAll('.hero .role, .hero h1, .hero .lede, .hero figure, section .eyebrow, section h2, .project, .note, .timeline .row, .stack > div, .workflow, .contact > p, .channel');
     var io = new IntersectionObserver(function (entries) {
       var k = 0;
       entries.forEach(function (e) {

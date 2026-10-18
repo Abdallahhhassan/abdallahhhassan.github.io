@@ -414,11 +414,13 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
         <p class="what">A low-code platform where teams build multi-agent AI workflows by connecting nodes on a canvas, then test and run them on real data.</p>
         <ul>
           <li>Built the graph-based workflow editor, where each node carries its own configuration and typed input and output ports, and incompatible connections are blocked while dragging.</li>
-          <li>Built the front end for the platform's reliability rules: built-in and custom rules, regex classifiers and routing, which decide what happens when an agent's output fails a check, including email alerts on exceptions.</li>
-          <li>Built the dataset mapping grid used to test workflows, with type mismatch detection and preprocessing functions, plus the flow for running evaluations against a dataset.</li>
-          <li>Added a filter agent node, resumable uploads for large dataset files, and live updates over SignalR for AI-generated workflow descriptions.</li>
+          <li>Built real-time collaboration on the canvas with Yjs CRDTs, syncing edits, live cursors and node selections between users.</li>
+          <li>Designed the Zustand state layer, with the store split into typed slices and Immer patches powering undo and redo.</li>
+          <li>Built the reliability rules UI with regex classifiers and routing, and the dataset mapping grid for running evaluations.</li>
+          <li>Built agent nodes including the LLM agent with structured outputs, OCR, deduplication and iterators, each with its own typed configuration panel.</li>
+          <li>Added resumable tus uploads with Uppy for large dataset files, and live updates over SignalR for AI-generated workflow descriptions.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="fe">React</li><li class="chip" data-t="fe">TypeScript</li><li class="chip" data-t="fe">React Flow</li><li class="chip" data-t="fe">Zustand</li><li class="chip" data-t="fe">ShadCN</li><li class="chip" data-t="fe">TanStack Query</li><li class="chip" data-t="be">SignalR</li></ul>
+        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="fe">React</li><li class="chip" data-t="fe">TypeScript</li><li class="chip" data-t="fe">React Flow</li><li class="chip" data-t="fe">Zustand</li><li class="chip" data-t="fe">Yjs</li><li class="chip" data-t="fe">ShadCN</li><li class="chip" data-t="fe">TanStack Query</li><li class="chip" data-t="be">SignalR</li></ul>
       </div>
     </article>
 
@@ -432,10 +434,12 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
         <p class="what">An accident recovery and insurance claims system covering the whole claim lifecycle, from submission through recovery.</p>
         <ul>
           <li>Delivered the full stack under strict data integrity and role-based access requirements.</li>
+          <li>Built Fast Track, the platform's main feature, as a multi-step Angular flow for batch claim and document submission, reworked across three versions from user feedback.</li>
+          <li>Wrote an RxJS-based chunked upload service for large document bundles, with parallel chunks, retries with exponential backoff and SHA-256 integrity checks.</li>
+          <li>Built the bilingual Angular front end with real-time SignalR notifications and an HTTP interceptor handling JWT auth and token refresh.</li>
           <li>Structured the .NET backend around CQRS and MediatR, separating read and write paths where auditability mattered.</li>
-          <li>Built the Angular front end with RxJS and Signals.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="be">.NET</li><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">RxJS</li><li class="chip" data-t="be">CQRS</li></ul>
+        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="be">.NET</li><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">RxJS</li><li class="chip" data-t="be">CQRS</li><li class="chip" data-t="be">SignalR</li></ul>
       </div>
     </article>
 

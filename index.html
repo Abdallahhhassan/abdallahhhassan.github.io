@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}body{margin:0}img{max-width:100%}</style>
 <title>Abdallah Hassan</title>
-<script>document.documentElement.classList.add('js-reveal');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>document.documentElement.classList.add('js-reveal');try{var q=new URLSearchParams(location.search).get('lang'),l=q==='ar'||q==='en'?q:localStorage.getItem('lang');if(l==='ar'){document.documentElement.lang='ar';document.documentElement.dir='rtl'}}catch(e){}try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315201b'/%3E%3Cpath d='M20 44C34 44 30 20 44 20' fill='none' stroke='%239fb0a8' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='44' r='8' fill='%232f6fd6'/%3E%3Ccircle cx='44' cy='20' r='8' fill='%23d4572a'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="description" content="Abdallah Hassan, full-stack engineer. TypeScript, React, Angular, Node.js and LLM-powered products.">
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Schibsted+Grotesk:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700;800&display=swap">
 <style>
 /* Layout: a sticky top bar, then one 1040px column. The hero pairs the intro with a
    small working workflow editor (drag the nodes, run the flow), because the graph
@@ -47,6 +47,7 @@
   --font-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-body: "IBM Plex Sans", "Segoe UI", Roboto, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-ar: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
   --bar-h: 60px;
 }
 @media (prefers-color-scheme: dark) {
@@ -107,7 +108,9 @@ h1, h2, h3 { text-wrap: balance; }
 }
 .icon-btn svg { width: 16px; height: 16px; flex: none; }
 .icon-btn:hover { border-color: var(--ink-3); }
-#theme { padding: 0; width: 34px; margin-left: 4px; }
+#theme { padding: 0; width: 34px; margin-inline-start: 4px; }
+#lang { padding: 0; width: 34px; margin-inline-start: 4px; font: 600 15px var(--font-ar); }
+:root[lang="ar"] #lang { font: 600 12.5px var(--font-body); letter-spacing: .02em; }
 #theme .sun, #theme[data-mode="dark"] .moon { display: none; }
 #theme[data-mode="dark"] .sun { display: block; }
 
@@ -147,7 +150,7 @@ h1, h2, h3 { text-wrap: balance; }
 .status { flex: 1; min-width: 0; font-size: 13.5px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status[data-tone="ok"] { color: var(--ok); }
 .status[data-tone="bad"] { color: var(--bad); }
-.graph { width: 100%; height: auto; display: block; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+.graph { direction: ltr; width: 100%; height: auto; display: block; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
 .graph .dotc { fill: var(--grid); }
 .graph .node { cursor: grab; touch-action: none; outline: none; }
 .graph .node.dragging { cursor: grabbing; }
@@ -203,7 +206,7 @@ h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.025e
 .ext svg { width: 13px; height: 13px; color: var(--ink-3); }
 .p-body { min-width: 0; }
 .what { margin: 0 0 14px; font-size: 1.06rem; color: var(--ink); max-width: 38em; }
-.p-body ul:not(.chips), .mini ul:not(.chips) { margin: 0 0 18px; padding-left: 1.1em; color: var(--ink-2); max-width: 38em; }
+.p-body ul:not(.chips), .mini ul:not(.chips) { margin: 0 0 18px; padding-inline-start: 1.1em; color: var(--ink-2); max-width: 38em; }
 .p-body li, .mini li { margin-bottom: 7px; }
 .p-body li::marker, .mini li::marker { color: var(--ink-3); }
 
@@ -261,6 +264,130 @@ footer { border-top: 1px solid var(--line); }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 24px 40px; font-size: 14px; color: var(--ink-3); }
 .foot a { color: var(--ink-2); text-underline-offset: 3px; }
 
+/* ---------- project diagrams ---------- */
+.viz { margin: 6px 0 0; max-width: 440px; }
+.viz-frame { border: 1px solid var(--line); border-radius: 12px; background: var(--canvas); overflow: hidden; }
+.viz svg { display: block; width: 100%; height: auto; direction: ltr; }
+.viz figcaption { margin: 9px 2px 0; font-size: 13px; line-height: 1.5; color: var(--ink-3); }
+.viz .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; }
+.viz .t { font: 600 11.5px var(--font-body); fill: var(--ink); }
+.viz .s { font: 400 9.5px var(--font-mono); fill: var(--ink-3); }
+:root[lang="ar"] .viz .s[data-ar], .viz .wiz-rtl .s { font: 400 10px var(--font-ar); }
+.viz .e { fill: none; stroke: var(--edge); stroke-width: 1.5; }
+.viz .vp.fe { fill: var(--t-fe); } .viz .vp.ai { fill: var(--t-ai); }
+.viz .track { fill: color-mix(in srgb, var(--ink) 9%, transparent); }
+.viz .bad-t { fill: var(--bad); } .viz .ok-t { fill: var(--ok); }
+.viz .ar-t { font: 600 12.5px var(--font-ar); fill: var(--ink); }
+.viz .ar-b { font: 400 10.5px var(--font-ar); fill: var(--ink-2); }
+.viz-frame { position: relative; }
+:root[lang="ar"] .wiz-ltr, :root:not([lang="ar"]) .wiz-rtl { display: none; }
+.viz .prog.from-r { transform-origin: right center; }
+.viz-pause {
+  position: absolute; top: 8px; inset-inline-end: 8px; z-index: 1;
+  width: 28px; height: 28px; display: grid; place-items: center; padding: 0;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink-2); cursor: pointer;
+  opacity: .0; transition: opacity .2s ease, border-color .2s ease;
+}
+.viz:hover .viz-pause, .viz-pause:focus-visible, .viz.paused .viz-pause { opacity: 1; }
+@media (hover: none) { .viz-pause { opacity: .85; } }
+.viz-pause:hover { border-color: var(--ink-3); color: var(--ink); }
+.viz-pause svg { width: 12px; height: 12px; fill: currentColor; }
+.viz-pause .i-play, .viz.paused .viz-pause .i-pause { display: none; }
+.viz.paused .viz-pause .i-play { display: block; }
+.viz.paused * { animation-play-state: paused !important; }
+/* collaboration */
+.viz .on-dot { fill: var(--ok); }
+.viz .selA { stroke: var(--t-fe); stroke-width: 1.8; }
+.viz .selB { stroke: var(--t-ai); stroke-width: 1.8; }
+.viz .cur text { font: 600 9px var(--font-body); fill: #fff; text-anchor: middle; }
+.viz .cur1 path, .viz .cur1 rect { fill: var(--t-fe); }
+.viz .cur2 path, .viz .cur2 rect { fill: var(--t-ai); }
+.viz .cur path { stroke: var(--surface); stroke-width: 1; }
+.viz .cur1 { transform: translate(104px, 84px); }
+.viz .cur2 { transform: translate(230px, 86px); }
+.viz.play .on-dot { animation: v-blink 2.4s ease-in-out infinite; }
+.viz.play .cur1 { animation: v-cur1 7s cubic-bezier(.45, 0, .2, 1) infinite; }
+.viz.play .cur2 { animation: v-cur2 7s cubic-bezier(.45, 0, .2, 1) infinite; }
+.viz.play .selA { animation: v-selA 7s linear infinite; }
+.viz.play .selB { animation: v-selB 7s linear infinite; }
+@keyframes v-blink { 50% { opacity: .35; } }
+@keyframes v-cur1 { 0%, 100% { transform: translate(150px, 172px); } 22%, 52% { transform: translate(104px, 84px); } 74% { transform: translate(40px, 140px); } }
+@keyframes v-cur2 { 0%, 100% { transform: translate(296px, 168px); } 30% { transform: translate(300px, 160px); } 48%, 84% { transform: translate(230px, 86px); } }
+@keyframes v-selA { 0%, 20%, 58%, 100% { stroke: var(--line); stroke-width: 1.2; } 24%, 54% { stroke: var(--t-fe); stroke-width: 1.8; } }
+@keyframes v-selB { 0%, 46%, 88%, 100% { stroke: var(--line); stroke-width: 1.2; } 50%, 84% { stroke: var(--t-ai); stroke-width: 1.8; } }
+/* chunked upload */
+.viz .bar { fill: var(--t-fe); transform-box: fill-box; transform-origin: left center; }
+.viz .retry, .viz .up { opacity: 0; }
+.viz.play .b0 { animation: v-b0 6s ease-in-out infinite; }
+.viz.play .b1 { animation: v-b1 6s ease-in-out infinite; }
+.viz.play .b2 { animation: v-b2 6s ease-in-out infinite; }
+.viz.play .b3 { animation: v-b3 6s ease-in-out infinite; }
+.viz.play .retry { animation: v-retry 6s linear infinite; }
+.viz.play .up { animation: v-up 6s linear infinite; }
+.viz.play .ver { animation: v-ver 6s linear infinite; }
+@keyframes v-b0 { 0% { transform: scaleX(0); } 32%, 100% { transform: scaleX(1); } }
+@keyframes v-b1 { 0%, 4% { transform: scaleX(0); } 40%, 100% { transform: scaleX(1); } }
+@keyframes v-b2 { 0%, 8% { transform: scaleX(0); } 26% { transform: scaleX(.62); fill: var(--t-fe); } 27%, 29% { transform: scaleX(.62); fill: var(--bad); } 31%, 44% { transform: scaleX(0); fill: var(--t-fe); } 74%, 100% { transform: scaleX(1); } }
+@keyframes v-b3 { 0%, 33% { transform: scaleX(0); } 70%, 100% { transform: scaleX(1); } }
+@keyframes v-retry { 0%, 26% { opacity: 0; } 29%, 44% { opacity: 1; } 49%, 100% { opacity: 0; } }
+@keyframes v-up { 0%, 76% { opacity: 1; } 79%, 100% { opacity: 0; } }
+@keyframes v-ver { 0%, 78% { opacity: 0; } 82%, 100% { opacity: 1; } }
+/* booking wizard */
+.viz .step { fill: var(--t-fe); stroke: var(--t-fe); stroke-width: 1.5; }
+.viz .num { font: 600 9.5px var(--font-mono); fill: #fff; }
+.viz .prog { fill: var(--t-fe); transform-box: fill-box; transform-origin: left center; }
+.viz .prog.rtl { transform-origin: right center; transform: scaleX(.45); }
+.viz .pill { fill: color-mix(in srgb, var(--ok) 16%, transparent); }
+.viz.play .prog:not(.rtl) { animation: v-prog 6s ease-in-out infinite; }
+.viz.play .s1 { animation: v-step1 6s linear infinite; } .viz.play .n1 { animation: v-num1 6s linear infinite; }
+.viz.play .s2 { animation: v-step2 6s linear infinite; } .viz.play .n2 { animation: v-num2 6s linear infinite; }
+.viz.play .s3 { animation: v-step3 6s linear infinite; } .viz.play .n3 { animation: v-num3 6s linear infinite; }
+.viz.play .k0 { animation: v-k0 6s linear infinite; } .viz.play .k1 { animation: v-k1 6s linear infinite; } .viz.play .k2 { animation: v-k2 6s linear infinite; }
+.viz.play .sent { animation: v-sent 6s ease-out infinite; }
+@keyframes v-prog { 0%, 10% { transform: scaleX(0); } 22%, 40% { transform: scaleX(.3334); } 52%, 64% { transform: scaleX(.6667); } 76%, 100% { transform: scaleX(1); } }
+@keyframes v-step1 { 0%, 21% { fill: var(--surface); stroke: var(--line); } 23%, 100% { fill: var(--t-fe); stroke: var(--t-fe); } }
+@keyframes v-num1 { 0%, 21% { fill: var(--ink-3); } 23%, 100% { fill: #fff; } }
+@keyframes v-step2 { 0%, 51% { fill: var(--surface); stroke: var(--line); } 53%, 100% { fill: var(--t-fe); stroke: var(--t-fe); } }
+@keyframes v-num2 { 0%, 51% { fill: var(--ink-3); } 53%, 100% { fill: #fff; } }
+@keyframes v-step3 { 0%, 75% { fill: var(--surface); stroke: var(--line); } 77%, 100% { fill: var(--t-fe); stroke: var(--t-fe); } }
+@keyframes v-num3 { 0%, 75% { fill: var(--ink-3); } 77%, 100% { fill: #fff; } }
+@keyframes v-k0 { 0%, 18% { opacity: 0; } 24%, 100% { opacity: 1; } }
+@keyframes v-k1 { 0%, 48% { opacity: 0; } 54%, 100% { opacity: 1; } }
+@keyframes v-k2 { 0%, 70% { opacity: 0; } 76%, 100% { opacity: 1; } }
+@keyframes v-sent { 0%, 80% { opacity: 0; transform: translateY(3px); } 86%, 100% { opacity: 1; transform: none; } }
+/* reader */
+.viz .wv { fill: var(--ink-3); transform-box: fill-box; transform-origin: center; }
+.viz .playb { fill: var(--ink); } .viz .playi { fill: var(--surface); }
+.viz.play .wv { animation: v-wave .9s ease-in-out infinite alternate; }
+.viz.play .prog.rtl { animation: v-read 6s linear infinite; }
+@keyframes v-wave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+@keyframes v-read { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .viz *, .viz.play * { animation: none !important; }
+  .viz-pause { display: none; }
+}
+
+/* ---------- keyboard ---------- */
+.skip { position: absolute; top: 0; inset-inline-start: 0; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip:focus { position: fixed; inset-inline-start: 12px; top: calc(env(safe-area-inset-top, 0px) + 10px); z-index: 50; width: auto; height: auto; overflow: visible; clip-path: none;
+  padding: 10px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font-weight: 600; text-decoration: none; }
+:is(a, button, [tabindex]):focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.btn:focus-visible, .icon-btn:focus-visible, .viz-pause:focus-visible { border-radius: 999px; }
+a.channel:focus-visible { border-radius: 12px; }
+[tabindex="-1"]:focus { outline: none; }
+
+/* ---------- Arabic, right to left ---------- */
+:root[lang="ar"] { --font-display: var(--font-ar); --font-body: "IBM Plex Sans Arabic", "IBM Plex Sans", "Segoe UI", Tahoma, sans-serif; }
+:root[lang="ar"] body { line-height: 1.75; }
+:root[lang="ar"] :is(h1, h2, h3, h4, .brand, .minor-h) { letter-spacing: 0; }
+:root[lang="ar"] .hero h1 { font-weight: 700; line-height: 1.3; font-size: clamp(2rem, 4.2vw, 3.1rem); }
+:root[lang="ar"] h2 { font-weight: 700; line-height: 1.35; }
+:root[lang="ar"] :is(.p-head h3, .mini h4) { font-weight: 700; line-height: 1.4; }
+:root[lang="ar"] .graph .title { font-size: 13.5px; }
+[dir="rtl"] .chip { direction: ltr; }
+[dir="rtl"] .channel .val[dir="ltr"] { text-align: right; }
+[dir="rtl"] .ext svg, [dir="rtl"] svg.flip { transform: scaleX(-1); }
+
 /* ---------- motion ---------- */
 html { scroll-behavior: smooth; }
 .btn, .icon-btn, a.channel, .bar nav .sec, .ext {
@@ -302,17 +429,19 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
 </style>
 </head>
 <body>
+<a class="skip" href="#top" data-ar="تخطَّ إلى المحتوى">Skip to content</a>
 <header class="bar" id="bar">
   <div class="wrap bar-in">
-    <a class="brand" href="#top" aria-label="Abdallah Hassan, back to top">
-      <span>Abdallah Hassan</span>
+    <a class="brand" href="#top" aria-label="Abdallah Hassan, back to top" data-ar-label="عبدالله حسن، العودة للأعلى">
+      <span data-ar="عبدالله حسن">Abdallah Hassan</span>
     </a>
-    <nav aria-label="Sections">
-      <a class="sec" href="#work">Work</a>
-      <a class="sec" href="#experience">Experience</a>
-      <a class="sec" href="#stack">Tools</a>
-      <a class="sec" href="#contact">Contact</a>
-      <a class="icon-btn" href="Abdallah_Hassan_CV.pdf" download="Abdallah_Hassan_CV.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>CV</a>
+    <nav aria-label="Sections" data-ar-label="الأقسام">
+      <a class="sec" href="#work" data-ar="الأعمال">Work</a>
+      <a class="sec" href="#experience" data-ar="الخبرات">Experience</a>
+      <a class="sec" href="#stack" data-ar="الأدوات">Tools</a>
+      <a class="sec" href="#contact" data-ar="التواصل">Contact</a>
+      <a class="icon-btn" href="Abdallah_Hassan_CV.pdf" download="Abdallah_Hassan_CV.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-ar="السيرة الذاتية">CV</span></a>
+      <button class="icon-btn" id="lang" type="button" aria-label="View this page in Arabic"><span lang="ar">ع</span></button>
       <button class="icon-btn" id="theme" type="button" aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
     </nav>
   </div>
@@ -321,26 +450,26 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
 <main class="wrap" id="top">
   <div class="hero">
     <div>
-      <p class="kicker"><strong>Abdallah Hassan</strong>, full-stack engineer with 3+ years in production</p>
-      <h1>I build web products, lately ones with AI agents inside.</h1>
-      <p class="lede">I take web products from idea to production with TypeScript, React and Node.js. Most of my recent work is on AI products: multi-agent workflows, tool calling and structured outputs, testing agents against real datasets, and the checks that keep model output usable once real users depend on it.</p>
+      <p class="kicker" data-ar="&lt;strong&gt;عبدالله حسن&lt;/strong&gt;، مهندس Full-Stack بخبرة تزيد على 3 سنوات في بيئات الإنتاج"><strong>Abdallah Hassan</strong>, full-stack engineer with 3+ years in production</p>
+      <h1 data-ar="أبني منتجات ويب، وأحدثها منتجات يعمل بداخلها وكلاء ذكاء اصطناعي.">I build web products, lately ones with AI agents inside.</h1>
+      <p class="lede" data-ar="أنقل منتجات الويب من الفكرة إلى الإنتاج باستخدام TypeScript وReact وNode.js. معظم عملي مؤخرًا على منتجات الذكاء الاصطناعي: مسارات عمل متعددة الوكلاء، واستدعاء الأدوات والمخرجات المنظَّمة، واختبار الوكلاء على بيانات حقيقية، والضوابط التي تُبقي مخرجات النماذج صالحة للاستخدام عندما يعتمد عليها مستخدمون حقيقيون.">I take web products from idea to production with TypeScript, React and Node.js. Most of my recent work is on AI products: multi-agent workflows, tool calling and structured outputs, testing agents against real datasets, and the checks that keep model output usable once real users depend on it.</p>
       <div class="links">
-        <a class="btn primary" href="#work">See my work</a>
-        <a class="btn" href="Abdallah_Hassan_CV.pdf" download="Abdallah_Hassan_CV.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CV</a>
+        <a class="btn primary" href="#work" data-ar="شاهد أعمالي">See my work</a>
+        <a class="btn" href="Abdallah_Hassan_CV.pdf" download="Abdallah_Hassan_CV.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-ar="تحميل السيرة الذاتية">Download CV</span></a>
         <a class="btn" href="https://www.linkedin.com/in/abdallahhhassan/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://github.com/Abdallahhhassan" target="_blank" rel="noopener">GitHub</a>
       </div>
-      <p class="avail"><span class="dot" aria-hidden="true"></span>Open to full-time and freelance roles, remote or on-site.</p>
+      <p class="avail" data-ar="&lt;span class=&quot;dot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;متاح للعمل بدوام كامل أو كمستقل، عن بُعد أو من المكتب."><span class="dot" aria-hidden="true"></span>Open to full-time and freelance roles, remote or on-site.</p>
     </div>
 
     <figure class="editor" id="editor">
       <div class="frame">
         <div class="toolbar">
-          <button class="btn small run" id="run" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>Run</button>
+          <button class="btn small run" id="run" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg><span data-ar="تشغيل">Run</span></button>
           <span class="status" id="status" aria-live="polite">Ready</span>
         </div>
         <svg class="graph" id="graph" viewBox="0 0 460 330" role="group" aria-labelledby="gTitle">
-          <title id="gTitle">An agent workflow: input goes to an agent step, its output is checked, and it either moves on or takes a fallback path</title>
+          <title id="gTitle" data-ar="مسار عمل لوكيل: يذهب المُدخل إلى خطوة الوكيل، ثم يُتحقق من مخرجاته، فإما أن ينتقل إلى الخطوة التالية أو يسلك مسارًا بديلًا">An agent workflow: input goes to an agent step, its output is checked, and it either moves on or takes a fallback path</title>
           <defs>
             <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle class="dotc" cx="2" cy="2" r="1.1"/></pattern>
           </defs>
@@ -350,192 +479,271 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
           <path class="edge" id="e-pass" data-from="checks:pass" data-to="next:in" d="M230 166 C177.8 166 202.2 250 150 250"/>
           <path class="edge" id="e-fail" data-from="checks:fail" data-to="fallback:in" d="M300 196 C300 224 300 208 300 236"/>
 
-          <g class="node" data-id="input" tabindex="0" aria-label="Input node" transform="translate(16 36)">
+          <g class="node" data-id="input" tabindex="0" aria-label="Input node" data-ar-label="عقدة المُدخل" transform="translate(16 36)">
             <rect width="134" height="60" rx="8"/>
-            <text class="title" x="14" y="26">Input</text>
+            <text class="title" x="14" y="26" data-ar="المُدخل">Input</text>
             <text class="sub" x="14" y="44">form · file · API</text>
             <circle class="p-in" data-port="out" data-side="right" cx="134" cy="30" r="5"/>
           </g>
-          <g class="node" data-id="agent" tabindex="0" aria-label="Agent step node" transform="translate(230 36)">
+          <g class="node" data-id="agent" tabindex="0" aria-label="Agent step node" data-ar-label="عقدة خطوة الوكيل" transform="translate(230 36)">
             <rect width="150" height="60" rx="8"/>
-            <text class="title" x="14" y="26">Agent step</text>
+            <text class="title" x="14" y="26" data-ar="خطوة الوكيل">Agent step</text>
             <text class="sub" x="14" y="44">LLM · tools · code</text>
             <circle class="p-in" data-port="in" data-side="left" cx="0" cy="30" r="5"/>
             <circle class="p-ai" data-port="out" data-side="right" cx="150" cy="46" r="5"/>
-            <text class="plabel" x="104" y="76">output</text>
+            <text class="plabel" x="104" y="76" data-ar="المخرج">output</text>
           </g>
-          <g class="node" data-id="checks" tabindex="0" aria-label="Checks node" transform="translate(230 136)">
+          <g class="node" data-id="checks" tabindex="0" aria-label="Checks node" data-ar-label="عقدة التحقق" transform="translate(230 136)">
             <rect width="130" height="60" rx="8"/>
-            <text class="title" x="14" y="26">Checks</text>
+            <text class="title" x="14" y="26" data-ar="التحقق">Checks</text>
             <text class="sub" x="14" y="44">schema · rules</text>
             <circle class="p-ai" data-port="in" data-side="right" cx="130" cy="14" r="5"/>
             <circle class="p-ok" data-port="pass" data-side="left" cx="0" cy="30" r="5"/>
             <circle class="p-bad" data-port="fail" data-side="bottom" cx="70" cy="60" r="5"/>
           </g>
-          <g class="node" data-id="fallback" tabindex="0" aria-label="Fallback route node" transform="translate(230 236)">
+          <g class="node" data-id="fallback" tabindex="0" aria-label="Fallback route node" data-ar-label="عقدة المسار البديل" transform="translate(230 236)">
             <rect width="150" height="60" rx="8"/>
-            <text class="title" x="14" y="26">Fallback route</text>
+            <text class="title" x="14" y="26" data-ar="المسار البديل">Fallback route</text>
             <text class="sub" x="14" y="44">retry · reroute</text>
             <circle class="p-bad" data-port="in" data-side="top" cx="70" cy="0" r="5"/>
-            <text class="plabel" x="82" y="-8">check failed</text>
+            <text class="plabel" x="82" y="-8" data-ar="فشل التحقق">check failed</text>
           </g>
-          <g class="node" data-id="next" tabindex="0" aria-label="Next step node" transform="translate(16 220)">
+          <g class="node" data-id="next" tabindex="0" aria-label="Next step node" data-ar-label="عقدة الخطوة التالية" transform="translate(16 220)">
             <rect width="134" height="60" rx="8"/>
-            <text class="title" x="14" y="26">Next step</text>
+            <text class="title" x="14" y="26" data-ar="الخطوة التالية">Next step</text>
             <text class="sub" x="14" y="44">typed output</text>
             <circle class="p-ok" data-port="in" data-side="right" cx="134" cy="30" r="5"/>
-            <text class="plabel" x="86" y="76">passed</text>
+            <text class="plabel" x="86" y="76" data-ar="نجح">passed</text>
           </g>
           <circle class="token" id="token" r="5.5" cx="150" cy="66"/>
         </svg>
       </div>
-      <figcaption>The shape most agent workflows I work on share: a model step, checks on what it returns, and a clear path for when a check fails. Drag the nodes to rearrange them.</figcaption>
+      <figcaption data-ar="الشكل الذي تشترك فيه معظم مسارات الوكلاء التي أعمل عليها: خطوة للنموذج، وتحقق مما يُرجعه، ومسار واضح عند فشل التحقق. اسحب العُقد، أو حدّد إحداها واستخدم مفاتيح الأسهم، لتحريكها.">The shape most agent workflows I work on share: a model step, checks on what it returns, and a clear path for when a check fails. Drag the nodes, or focus one and use the arrow keys, to move them.</figcaption>
     </figure>
   </div>
 
   <section id="work">
     <div class="sec-head">
-      <h2>Selected projects</h2>
-      <ul class="legend" aria-label="Color key for the tech tags">
-        <li data-t="fe"><span class="tdot"></span>Frontend</li>
-        <li data-t="be"><span class="tdot"></span>Backend and data</li>
-        <li data-t="ai"><span class="tdot"></span>AI</li>
-        <li data-t="cl"><span class="tdot"></span>Cloud</li>
+      <h2 data-ar="مشاريع مختارة">Selected projects</h2>
+      <ul class="legend" aria-label="Color key for the tech tags" data-ar-label="دليل ألوان وسوم التقنيات">
+        <li data-t="fe" data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;الواجهة الأمامية"><span class="tdot"></span>Frontend</li>
+        <li data-t="be" data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;الخلفية والبيانات"><span class="tdot"></span>Backend and data</li>
+        <li data-t="ai" data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;الذكاء الاصطناعي"><span class="tdot"></span>AI</li>
+        <li data-t="cl" data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;السحابة"><span class="tdot"></span>Cloud</li>
       </ul>
     </div>
 
     <article class="project">
       <header class="p-head">
         <h3>Action AI</h3>
-        <dl class="facts"><dt>Domain</dt><dd>Enterprise AI automation</dd><dt>Role</dt><dd>Front end</dd></dl>
+        <dl class="facts"><dt data-ar="المجال">Domain</dt><dd data-ar="أتمتة الذكاء الاصطناعي للمؤسسات">Enterprise AI automation</dd><dt data-ar="الدور">Role</dt><dd data-ar="الواجهة الأمامية">Front end</dd></dl>
         <a class="ext" href="https://www.actionai.co/" target="_blank" rel="noopener">actionai.co<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <figure class="viz" data-viz="collab">
+          <div class="viz-frame">
+            <button class="viz-pause" type="button" aria-pressed="false" aria-label="Pause animation"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.4-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg></button>
+            <svg viewBox="0 0 320 190" role="img" aria-label="Two people editing the same workflow canvas at the same time" data-ar-label="شخصان يعدّلان لوحة مسار العمل نفسها في الوقت ذاته">
+              <rect width="320" height="190" fill="url(#dots)"/>
+              <g class="presence"><circle class="on-dot a" cx="18" cy="18" r="3.5"/><text class="s" x="27" y="21" data-ar="متصلان الآن · متزامن">2 online · synced</text></g>
+              <path class="e" d="M120 70 C150 70 160 70 190 70"/>
+              <path class="e" d="M262 92 C262 132 236 146 200 146"/>
+              <g><rect class="box selA a" x="16" y="48" width="104" height="44" rx="7"/><text class="t" x="28" y="67">Trigger</text><text class="s" x="28" y="82">webhook</text></g>
+              <g><rect class="box selB a" x="190" y="48" width="116" height="44" rx="7"/><text class="t" x="202" y="67">LLM agent</text><text class="s" x="202" y="82">structured output</text></g>
+              <g><rect class="box" x="84" y="124" width="116" height="44" rx="7"/><text class="t" x="96" y="143">Router</text><text class="s" x="96" y="158">rules · fallback</text></g>
+              <circle class="vp fe" cx="120" cy="70" r="4"/><circle class="vp fe" cx="190" cy="70" r="4"/><circle class="vp ai" cx="262" cy="92" r="4"/><circle class="vp ai" cx="200" cy="146" r="4"/>
+              <g class="cur cur1 a"><path d="M0 0v14l3.6-3.2 2.6 5.8 2.3-1-2.6-5.6H11z"/><rect x="9" y="14" width="30" height="15" rx="4"/><text x="24" y="24.5" data-ar="أنت">you</text></g>
+              <g class="cur cur2 a"><path d="M0 0v14l3.6-3.2 2.6 5.8 2.3-1-2.6-5.6H11z"/><rect x="-58" y="14" width="56" height="15" rx="4"/><text x="-30" y="24.5" data-ar="زميل">teammate</text></g>
+            </svg>
+          </div>
+          <figcaption data-ar="شخصان يعدّلان سير العمل نفسه في الوقت ذاته، بمزامنة عبر Yjs.">Two people editing the same workflow at once, kept in sync with Yjs.</figcaption>
+        </figure>
       </header>
       <div class="p-body">
-        <p class="what">A low-code platform where teams build multi-agent AI workflows by connecting nodes on a canvas, then test and run them on real data.</p>
+        <p class="what" data-ar="منصة Low-code تبني فيها الفرق مسارات عمل متعددة الوكلاء بالذكاء الاصطناعي عبر ربط العُقد على لوحة مرئية، ثم تختبرها وتشغّلها على بيانات حقيقية.">A low-code platform where teams build multi-agent AI workflows by connecting nodes on a canvas, then test and run them on real data.</p>
         <ul>
-          <li>Built the graph-based workflow editor, where each node carries its own configuration and typed input and output ports, and incompatible connections are blocked while dragging.</li>
-          <li>Built real-time collaboration on the canvas with Yjs CRDTs, syncing edits, live cursors and node selections between users.</li>
-          <li>Designed the Zustand state layer, with the store split into typed slices and Immer patches powering undo and redo.</li>
-          <li>Built the reliability rules UI with regex classifiers and routing, and the dataset mapping grid for running evaluations.</li>
-          <li>Built agent nodes including the LLM agent with structured outputs, OCR, deduplication and iterators, each with its own typed configuration panel.</li>
-          <li>Added resumable tus uploads with Uppy for large dataset files, and live updates over SignalR for AI-generated workflow descriptions.</li>
+          <li data-ar="بنيت محرر مسارات العمل القائم على الرسوم البيانية، حيث تحمل كل عقدة إعداداتها ومنافذ إدخال وإخراج محددة الأنواع، وتُمنع الاتصالات غير المتوافقة أثناء السحب.">Built the graph-based workflow editor, where each node carries its own configuration and typed input and output ports, and incompatible connections are blocked while dragging.</li>
+          <li data-ar="بنيت التعاون اللحظي على اللوحة باستخدام Yjs CRDTs، مع مزامنة التعديلات والمؤشرات الحية وتحديد العُقد بين المستخدمين.">Built real-time collaboration on the canvas with Yjs CRDTs, syncing edits, live cursors and node selections between users.</li>
+          <li data-ar="صممت طبقة إدارة الحالة باستخدام Zustand، بمخزن مقسّم إلى شرائح محددة الأنواع، مع تراجع وإعادة يعتمدان على Immer patches.">Designed the Zustand state layer, with the store split into typed slices and Immer patches powering undo and redo.</li>
+          <li data-ar="بنيت واجهة قواعد الموثوقية مع مصنّفات regex والتوجيه، وجدول ربط مجموعات البيانات لتشغيل التقييمات.">Built the reliability rules UI with regex classifiers and routing, and the dataset mapping grid for running evaluations.</li>
+          <li data-ar="بنيت عُقد وكلاء منها وكيل LLM بمخرجات منظَّمة، وOCR، وإزالة التكرار، والتكرار على البيانات، ولكل منها لوحة إعدادات محددة الأنواع.">Built agent nodes including the LLM agent with structured outputs, OCR, deduplication and iterators, each with its own typed configuration panel.</li>
+          <li data-ar="أضفت رفعًا قابلًا للاستئناف عبر tus وUppy لملفات البيانات الكبيرة، وتحديثات حية عبر SignalR لأوصاف مسارات العمل المولَّدة بالذكاء الاصطناعي.">Added resumable tus uploads with Uppy for large dataset files, and live updates over SignalR for AI-generated workflow descriptions.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="fe">React</li><li class="chip" data-t="fe">TypeScript</li><li class="chip" data-t="fe">React Flow</li><li class="chip" data-t="fe">Zustand</li><li class="chip" data-t="fe">Yjs</li><li class="chip" data-t="fe">ShadCN</li><li class="chip" data-t="fe">TanStack Query</li><li class="chip" data-t="be">SignalR</li></ul>
+        <ul class="chips" aria-label="Tech used" data-ar-label="التقنيات المستخدمة"><li class="chip" data-t="fe">React</li><li class="chip" data-t="fe">TypeScript</li><li class="chip" data-t="fe">React Flow</li><li class="chip" data-t="fe">Zustand</li><li class="chip" data-t="fe">Yjs</li><li class="chip" data-t="fe">ShadCN</li><li class="chip" data-t="fe">TanStack Query</li><li class="chip" data-t="be">SignalR</li></ul>
       </div>
     </article>
 
     <article class="project">
       <header class="p-head">
         <h3>Mosadad</h3>
-        <dl class="facts"><dt>Domain</dt><dd>Insurance claims</dd><dt>Role</dt><dd>Full stack</dd></dl>
+        <dl class="facts"><dt data-ar="المجال">Domain</dt><dd data-ar="مطالبات التأمين">Insurance claims</dd><dt data-ar="الدور">Role</dt><dd data-ar="Full-Stack">Full stack</dd></dl>
         <a class="ext" href="https://www.mosadad.org/" target="_blank" rel="noopener">mosadad.org<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <figure class="viz" data-viz="upload">
+          <div class="viz-frame">
+            <button class="viz-pause" type="button" aria-pressed="false" aria-label="Pause animation"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.4-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg></button>
+            <svg viewBox="0 0 320 190" role="img" aria-label="A large file split into chunks that upload in parallel, with a retry and an integrity check" data-ar-label="ملف كبير مقسّم إلى أجزاء تُرفع بالتوازي، مع إعادة محاولة وفحص سلامة">
+              <rect width="320" height="190" fill="url(#dots)"/>
+              <path class="e" d="M110 90 C122 90 118 32 130 32"/><text class="s" x="134" y="35" data-ar="جزء 1">chunk 1</text><rect class="track" x="182" y="28" width="122" height="8" rx="4"/><rect class="bar b0 a" x="182" y="28" width="122" height="8" rx="4"/><path class="e" d="M110 90 C122 90 118 62 130 62"/><text class="s" x="134" y="65" data-ar="جزء 2">chunk 2</text><rect class="track" x="182" y="58" width="122" height="8" rx="4"/><rect class="bar b1 a" x="182" y="58" width="122" height="8" rx="4"/><path class="e" d="M110 90 C122 90 118 92 130 92"/><text class="s" x="134" y="95" data-ar="جزء 3">chunk 3</text><rect class="track" x="182" y="88" width="122" height="8" rx="4"/><rect class="bar b2 a" x="182" y="88" width="122" height="8" rx="4"/><path class="e" d="M110 90 C122 90 118 122 130 122"/><text class="s" x="134" y="125" data-ar="جزء 4">chunk 4</text><rect class="track" x="182" y="118" width="122" height="8" rx="4"/><rect class="bar b3 a" x="182" y="118" width="122" height="8" rx="4"/>
+              <g><rect class="box" x="14" y="62" width="96" height="56" rx="7"/><text class="t" x="26" y="85">bundle.zip</text><text class="s" x="26" y="101" data-ar="مطالبات + مستندات">claims + docs</text></g>
+              <text class="s bad-t retry a" x="243" y="79" text-anchor="middle" data-ar="إعادة المحاولة">retry</text>
+              <text class="s up a" x="14" y="172" data-ar="جارٍ الرفع · 3 أجزاء بالتوازي">uploading · 3 in parallel</text>
+              <text class="s ok-t ver a" x="14" y="172" data-ar="✓ تم التحقق عبر SHA-256">✓ SHA-256 verified</text>
+            </svg>
+          </div>
+          <figcaption data-ar="تُرفع الحزم الكبيرة في أجزاء متوازية، مع إعادة المحاولة عند الفشل والتحقق عبر SHA-256.">Large bundles upload in parallel chunks, retried on failure and verified with SHA-256.</figcaption>
+        </figure>
       </header>
       <div class="p-body">
-        <p class="what">An accident recovery and insurance claims system covering the whole claim lifecycle, from submission through recovery.</p>
+        <p class="what" data-ar="نظام لاسترداد مطالبات الحوادث والتأمين يغطي دورة حياة المطالبة كاملة، من التقديم حتى الاسترداد.">An accident recovery and insurance claims system covering the whole claim lifecycle, from submission through recovery.</p>
         <ul>
-          <li>Delivered the full stack under strict data integrity and role-based access requirements.</li>
-          <li>Built Fast Track, the platform's main feature, as a multi-step Angular flow for batch claim and document submission, reworked across three versions from user feedback.</li>
-          <li>Wrote an RxJS-based chunked upload service for large document bundles, with parallel chunks, retries with exponential backoff and SHA-256 integrity checks.</li>
-          <li>Built the bilingual Angular front end with real-time SignalR notifications and an HTTP interceptor handling JWT auth and token refresh.</li>
-          <li>Structured the .NET backend around CQRS and MediatR, separating read and write paths where auditability mattered.</li>
+          <li data-ar="سلّمت النظام كاملًا (Full-Stack) وفق متطلبات صارمة لسلامة البيانات والتحكم في الصلاحيات حسب الأدوار.">Delivered the full stack under strict data integrity and role-based access requirements.</li>
+          <li data-ar="بنيت Fast Track، الميزة الرئيسية في المنصة، كمسار متعدد الخطوات في Angular لتقديم المطالبات والمستندات على دفعات، وطوّرتها عبر ثلاثة إصدارات بناءً على ملاحظات المستخدمين.">Built Fast Track, the platform's main feature, as a multi-step Angular flow for batch claim and document submission, reworked across three versions from user feedback.</li>
+          <li data-ar="كتبت خدمة رفع مقسّم مبنية على RxJS لحزم المستندات الكبيرة، مع رفع الأجزاء بالتوازي، وإعادة المحاولة بتأخير متزايد، وفحوصات سلامة عبر SHA-256.">Wrote an RxJS-based chunked upload service for large document bundles, with parallel chunks, retries with exponential backoff and SHA-256 integrity checks.</li>
+          <li data-ar="بنيت واجهة Angular ثنائية اللغة مع إشعارات لحظية عبر SignalR، وHTTP interceptor يدير مصادقة JWT وتجديد التوكن.">Built the bilingual Angular front end with real-time SignalR notifications and an HTTP interceptor handling JWT auth and token refresh.</li>
+          <li data-ar="نظّمت الخلفية في .NET وفق نمط CQRS وMediatR، مع فصل مسارات القراءة والكتابة حيث تهم قابلية التدقيق.">Structured the .NET backend around CQRS and MediatR, separating read and write paths where auditability mattered.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="be">.NET</li><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">RxJS</li><li class="chip" data-t="be">CQRS</li><li class="chip" data-t="be">SignalR</li></ul>
+        <ul class="chips" aria-label="Tech used" data-ar-label="التقنيات المستخدمة"><li class="chip" data-t="be">.NET</li><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">RxJS</li><li class="chip" data-t="be">CQRS</li><li class="chip" data-t="be">SignalR</li></ul>
       </div>
     </article>
 
     <article class="project">
       <header class="p-head">
         <h3>Eddie's Portal</h3>
-        <dl class="facts"><dt>Domain</dt><dd>Events and booking</dd><dt>Role</dt><dd>Full stack</dd></dl>
+        <dl class="facts"><dt data-ar="المجال">Domain</dt><dd data-ar="الفعاليات والحجوزات">Events and booking</dd><dt data-ar="الدور">Role</dt><dd data-ar="Full-Stack">Full stack</dd></dl>
         <a class="ext" href="https://eddies-entertainment.com/" target="_blank" rel="noopener">eddies-entertainment.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <figure class="viz" data-viz="wizard">
+          <div class="viz-frame">
+            <button class="viz-pause" type="button" aria-pressed="false" aria-label="Pause animation"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.4-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg></button>
+            <svg class="wiz-ltr" viewBox="0 0 320 190" role="img" aria-label="A four-step booking wizard that ends in a booking request" data-ar-label="معالج حجز من أربع خطوات ينتهي بطلب حجز">
+              <rect width="320" height="190" fill="url(#dots)"/>
+              <rect class="track" x="44" y="43" width="240" height="2"/>
+              <rect class="prog a" x="44" y="43" width="240" height="2"/>
+              <circle class="step s0 a" cx="44" cy="44" r="10"/><text class="num n0 a" x="44" y="47.5" text-anchor="middle">1</text><text class="s" x="44" y="72" text-anchor="middle" data-ar="الفعالية">Event</text><circle class="step s1 a" cx="124" cy="44" r="10"/><text class="num n1 a" x="124" y="47.5" text-anchor="middle">2</text><text class="s" x="124" y="72" text-anchor="middle" data-ar="الموهبة">Talent</text><circle class="step s2 a" cx="204" cy="44" r="10"/><text class="num n2 a" x="204" y="47.5" text-anchor="middle">3</text><text class="s" x="204" y="72" text-anchor="middle" data-ar="التفاصيل">Details</text><circle class="step s3 a" cx="284" cy="44" r="10"/><text class="num n3 a" x="284" y="47.5" text-anchor="middle">4</text><text class="s" x="284" y="72" text-anchor="middle" data-ar="الطلب">Request</text>
+              <g><rect class="box" x="70" y="94" width="180" height="76" rx="8"/><text class="t" x="84" y="114" data-ar="طلب حجز">Booking request</text>
+              <rect class="track sk k0 a" x="84" y="126" width="120" height="6" rx="3"/><rect class="track sk k1 a" x="84" y="139" width="92" height="6" rx="3"/><rect class="track sk k2 a" x="84" y="152" width="108" height="6" rx="3"/>
+              <g class="sent a"><rect class="pill" x="194" y="103" width="44" height="16" rx="8"/><text class="s ok-t" x="216" y="114.5" text-anchor="middle" data-ar="أُرسل">sent</text></g></g>
+            </svg>
+            <svg class="wiz-rtl" viewBox="0 0 320 190" role="img" aria-label="معالج حجز من أربع خطوات ينتهي بطلب حجز">
+              <rect width="320" height="190" fill="url(#dots)"/>
+              <rect class="track" x="44" y="43" width="240" height="2"/>
+              <rect class="prog from-r a" x="44" y="43" width="240" height="2"/>
+              <circle class="step s0 a" cx="284" cy="44" r="10"/><text class="num n0 a" x="284" y="47.5" text-anchor="middle">1</text><text class="s" x="284" y="72" text-anchor="middle">الفعالية</text><circle class="step s1 a" cx="204" cy="44" r="10"/><text class="num n1 a" x="204" y="47.5" text-anchor="middle">2</text><text class="s" x="204" y="72" text-anchor="middle">الموهبة</text><circle class="step s2 a" cx="124" cy="44" r="10"/><text class="num n2 a" x="124" y="47.5" text-anchor="middle">3</text><text class="s" x="124" y="72" text-anchor="middle">التفاصيل</text><circle class="step s3 a" cx="44" cy="44" r="10"/><text class="num n3 a" x="44" y="47.5" text-anchor="middle">4</text><text class="s" x="44" y="72" text-anchor="middle">الطلب</text>
+              <g><rect class="box" x="70" y="94" width="180" height="76" rx="8"/><text class="t" x="236" y="114" text-anchor="end">طلب حجز</text>
+              <rect class="track sk k0 a" x="116" y="126" width="120" height="6" rx="3"/><rect class="track sk k1 a" x="144" y="139" width="92" height="6" rx="3"/><rect class="track sk k2 a" x="128" y="152" width="108" height="6" rx="3"/>
+              <g class="sent a"><rect class="pill" x="84" y="103" width="44" height="16" rx="8"/><text class="s ok-t" x="106" y="114.5" text-anchor="middle">أُرسل</text></g></g>
+            </svg>
+          </div>
+          <figcaption data-ar="معالج قصير ينتهي بطلب حجز منظَّم.">A short wizard that ends in a structured booking request.</figcaption>
+        </figure>
       </header>
       <div class="p-body">
-        <p class="what">An events and booking platform for venues, talents and shows.</p>
+        <p class="what" data-ar="منصة للفعاليات والحجوزات تجمع أماكن الفعاليات والمواهب والعروض.">An events and booking platform for venues, talents and shows.</p>
         <ul>
-          <li>Built the Angular front end with server-side rendering and prerendered routes, styled with Tailwind and Spartan UI.</li>
-          <li>Built the Create Your Event and Book a Performance wizards, which send a structured booking request, plus search, filtering and media carousels.</li>
-          <li>Built the admin panel for managing venues, talents and shows, with multipart media uploads and progress tracking, and a bookings view with status updates.</li>
-          <li>Handled SEO and tracking: dynamic meta tags, sitemap, structured data, and Google Ads conversions for booking requests.</li>
-          <li>Wrote Python backend services with transactional email, deployed on Cloudflare Pages, D1 and R2.</li>
+          <li data-ar="بنيت واجهة Angular مع العرض من جهة الخادم (SSR) والمسارات المُعدّة مسبقًا، باستخدام Tailwind وSpartan UI.">Built the Angular front end with server-side rendering and prerendered routes, styled with Tailwind and Spartan UI.</li>
+          <li data-ar="بنيت معالجَي «أنشئ فعاليتك» و«احجز عرضًا» اللذين يرسلان طلب حجز منظَّمًا، إلى جانب البحث والتصفية وعروض الوسائط.">Built the Create Your Event and Book a Performance wizards, which send a structured booking request, plus search, filtering and media carousels.</li>
+          <li data-ar="بنيت لوحة الإدارة لإدارة الأماكن والمواهب والعروض، مع رفع الوسائط متعدد الأجزاء وتتبع التقدم، وعرض للحجوزات مع تحديث حالاتها.">Built the admin panel for managing venues, talents and shows, with multipart media uploads and progress tracking, and a bookings view with status updates.</li>
+          <li data-ar="تولّيت تحسين محركات البحث والتتبع: وسوم meta ديناميكية، وخريطة الموقع، والبيانات المنظَّمة، وتحويلات Google Ads لطلبات الحجز.">Handled SEO and tracking: dynamic meta tags, sitemap, structured data, and Google Ads conversions for booking requests.</li>
+          <li data-ar="كتبت خدمات خلفية بلغة Python مع رسائل بريد المعاملات، ونشرتها على Cloudflare Pages وD1 وR2.">Wrote Python backend services with transactional email, deployed on Cloudflare Pages, D1 and R2.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">SSR</li><li class="chip" data-t="fe">Tailwind</li><li class="chip" data-t="fe">Spartan UI</li><li class="chip" data-t="be">Python</li><li class="chip" data-t="cl">Cloudflare</li></ul>
+        <ul class="chips" aria-label="Tech used" data-ar-label="التقنيات المستخدمة"><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">SSR</li><li class="chip" data-t="fe">Tailwind</li><li class="chip" data-t="fe">Spartan UI</li><li class="chip" data-t="be">Python</li><li class="chip" data-t="cl">Cloudflare</li></ul>
       </div>
     </article>
 
     <article class="project">
       <header class="p-head">
         <h3>Edara</h3>
-        <dl class="facts"><dt>Domain</dt><dd>Knowledge platform</dd><dt>Role</dt><dd>Front end</dd></dl>
+        <dl class="facts"><dt data-ar="المجال">Domain</dt><dd data-ar="منصة معرفية">Knowledge platform</dd><dt data-ar="الدور">Role</dt><dd data-ar="الواجهة الأمامية">Front end</dd></dl>
         <a class="ext" href="https://www.edara.com/home" target="_blank" rel="noopener">edara.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <figure class="viz" data-viz="reader">
+          <div class="viz-frame">
+            <button class="viz-pause" type="button" aria-pressed="false" aria-label="Pause animation"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx="1"/><rect x="9" y="3" width="3" height="10" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.4-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg></button>
+            <svg viewBox="0 0 320 190" role="img" aria-label="An Arabic book summary laid out right to left, with a read-aloud player" data-ar-label="ملخص كتاب عربي من اليمين إلى اليسار، مع مشغّل للقراءة الصوتية">
+              <rect width="320" height="190" fill="url(#dots)"/>
+              <rect class="box" x="60" y="12" width="200" height="128" rx="8"/>
+              <text class="ar-t" x="246" y="38" text-anchor="end">القيادة تبدأ بالاستماع</text>
+              <text class="ar-b" x="246" y="60" text-anchor="end">القائد الجيد يسمع أكثر مما يتكلم</text>
+              <text class="ar-b" x="246" y="78" text-anchor="end">ويحوّل ما يسمعه إلى قرارات واضحة</text>
+              <text class="ar-b" x="246" y="96" text-anchor="end">يفهمها الفريق ويثق بها</text>
+              <rect class="track" x="122" y="108" width="124" height="6" rx="3"/>
+              <rect class="track" x="150" y="120" width="96" height="6" rx="3"/>
+              <text class="s" x="74" y="130">١٢</text>
+              <rect class="box" x="60" y="150" width="200" height="28" rx="14"/>
+              <rect class="wv a" x="92" y="160.0" width="3.2" height="8" rx="1.6" style="animation-delay:-0.00s"/><rect class="wv a" x="102" y="157.0" width="3.2" height="14" rx="1.6" style="animation-delay:-0.13s"/><rect class="wv a" x="112" y="159.0" width="3.2" height="10" rx="1.6" style="animation-delay:-0.26s"/><rect class="wv a" x="122" y="155.0" width="3.2" height="18" rx="1.6" style="animation-delay:-0.39s"/><rect class="wv a" x="132" y="158.0" width="3.2" height="12" rx="1.6" style="animation-delay:-0.52s"/><rect class="wv a" x="142" y="156.0" width="3.2" height="16" rx="1.6" style="animation-delay:-0.65s"/><rect class="wv a" x="152" y="159.5" width="3.2" height="9" rx="1.6" style="animation-delay:-0.78s"/><rect class="wv a" x="162" y="156.5" width="3.2" height="15" rx="1.6" style="animation-delay:-0.01s"/><rect class="wv a" x="172" y="158.5" width="3.2" height="11" rx="1.6" style="animation-delay:-0.14s"/><rect class="wv a" x="182" y="155.5" width="3.2" height="17" rx="1.6" style="animation-delay:-0.27s"/><rect class="wv a" x="192" y="160.0" width="3.2" height="8" rx="1.6" style="animation-delay:-0.40s"/><rect class="wv a" x="202" y="157.5" width="3.2" height="13" rx="1.6" style="animation-delay:-0.53s"/><rect class="wv a" x="212" y="159.0" width="3.2" height="10" rx="1.6" style="animation-delay:-0.66s"/><rect class="wv a" x="222" y="161.0" width="3.2" height="6" rx="1.6" style="animation-delay:-0.79s"/>
+              <rect class="track" x="88" y="174" width="140" height="1.6"/>
+              <rect class="prog rtl a" x="88" y="174" width="140" height="1.6"/>
+              <circle class="playb" cx="244" cy="164" r="9"/><path class="playi" d="M241 159.5v9l7-4.5z"/>
+              <text class="s" x="70" y="167.5">1×</text>
+            </svg>
+          </div>
+          <figcaption data-ar="القارئ من اليمين إلى اليسار، مع تشغيل القراءة الصوتية.">The reader, right to left, with read-aloud playback.</figcaption>
+        </figure>
       </header>
       <div class="p-body">
-        <p class="what">The largest Arabic platform for management and leadership knowledge, with 15,000+ book summaries, audiobooks, articles and consultations for individuals, teams and organizations.</p>
+        <p class="what" data-ar="أكبر منصة عربية في الإدارة والقيادة، تضم أكثر من 15,000 ملخص كتاب وكتاب صوتي ومقال واستشارة للأفراد والفرق والمؤسسات.">The largest Arabic platform for management and leadership knowledge, with 15,000+ book summaries, audiobooks, articles and consultations for individuals, teams and organizations.</p>
         <ul>
-          <li>Built the reader used for every summary on the platform, rendering PDF and EPUB with ePub.js, plus graphic book support.</li>
-          <li>Built the read-aloud feature with text-to-speech, and the chat interface for Edara's AI chatbot.</li>
-          <li>Built the organizations portal for team and company subscriptions.</li>
-          <li>Built bilingual Arabic and English layouts with full right-to-left support.</li>
+          <li data-ar="بنيت القارئ المستخدم لكل ملخص على المنصة، مع عرض ملفات PDF وEPUB عبر ePub.js ودعم الكتب المصوّرة.">Built the reader used for every summary on the platform, rendering PDF and EPUB with ePub.js, plus graphic book support.</li>
+          <li data-ar="بنيت ميزة القراءة الصوتية بتحويل النص إلى كلام، وواجهة المحادثة لروبوت الدردشة الذكي في إدارة.كوم.">Built the read-aloud feature with text-to-speech, and the chat interface for Edara's AI chatbot.</li>
+          <li data-ar="بنيت بوابة المؤسسات لاشتراكات الفرق والشركات.">Built the organizations portal for team and company subscriptions.</li>
+          <li data-ar="بنيت واجهات ثنائية اللغة بالعربية والإنجليزية مع دعم كامل للاتجاه من اليمين إلى اليسار.">Built bilingual Arabic and English layouts with full right-to-left support.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">ePub.js</li><li class="chip" data-t="fe">text to speech</li><li class="chip" data-t="fe">RTL</li></ul>
+        <ul class="chips" aria-label="Tech used" data-ar-label="التقنيات المستخدمة"><li class="chip" data-t="fe">Angular</li><li class="chip" data-t="fe">ePub.js</li><li class="chip" data-t="fe">text to speech</li><li class="chip" data-t="fe">RTL</li></ul>
       </div>
     </article>
 
-    <h3 class="minor-h">More projects</h3>
+    <h3 class="minor-h" data-ar="مشاريع أخرى">More projects</h3>
     <div class="minor">
       <article class="mini">
         <h4>RakMun</h4>
-        <p class="meta">Mobile app for iOS and Android, full stack</p>
-        <p class="what">A cross-platform mobile app shipped to both app stores.</p>
+        <p class="meta" data-ar="تطبيق جوال لنظامي iOS وAndroid، Full-Stack">Mobile app for iOS and Android, full stack</p>
+        <p class="what" data-ar="تطبيق جوال متعدد المنصات منشور على متجري التطبيقات.">A cross-platform mobile app shipped to both app stores.</p>
         <ul>
-          <li>Built the app in React Native and Expo, with a Node.js and MongoDB backend for authentication, data and API integration.</li>
-          <li>Ran sprint planning, task breakdown and delivery tracking as Scrum Master for a 5-person team, alongside hands-on development.</li>
+          <li data-ar="بنيت التطبيق باستخدام React Native وExpo، مع خلفية Node.js وMongoDB للمصادقة والبيانات وتكامل الواجهات البرمجية.">Built the app in React Native and Expo, with a Node.js and MongoDB backend for authentication, data and API integration.</li>
+          <li data-ar="أدرت تخطيط السبرنت وتقسيم المهام ومتابعة التسليم بصفتي Scrum Master لفريق من 5 أشخاص، إلى جانب التطوير الفعلي.">Ran sprint planning, task breakdown and delivery tracking as Scrum Master for a 5-person team, alongside hands-on development.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="fe">React Native</li><li class="chip" data-t="fe">Expo</li><li class="chip" data-t="be">Node.js</li><li class="chip" data-t="be">MongoDB</li></ul>
+        <ul class="chips" aria-label="Tech used" data-ar-label="التقنيات المستخدمة"><li class="chip" data-t="fe">React Native</li><li class="chip" data-t="fe">Expo</li><li class="chip" data-t="be">Node.js</li><li class="chip" data-t="be">MongoDB</li></ul>
       </article>
       <article class="mini">
-        <h4>Traffic recognition</h4>
-        <p class="meta">Computer vision, graduation project</p>
-        <p class="what">Real-time detection of vehicles, pedestrians and traffic signals for driver assistance.</p>
+        <h4 data-ar="التعرّف على حركة المرور">Traffic recognition</h4>
+        <p class="meta" data-ar="رؤية حاسوبية، مشروع التخرج">Computer vision, graduation project</p>
+        <p class="what" data-ar="رصد لحظي للمركبات والمشاة وإشارات المرور لمساعدة السائق.">Real-time detection of vehicles, pedestrians and traffic signals for driver assistance.</p>
         <ul>
-          <li>Trained a YOLOv3-Tiny model running at 30+ FPS, with lane and crosswalk detection at 94% accuracy.</li>
-          <li>Served live detections through Flask and Node.js APIs to a React front end on AWS.</li>
+          <li data-ar="درّبت نموذج YOLOv3-Tiny يعمل بأكثر من 30 إطارًا في الثانية، مع رصد المسارات وممرات المشاة بدقة 94%.">Trained a YOLOv3-Tiny model running at 30+ FPS, with lane and crosswalk detection at 94% accuracy.</li>
+          <li data-ar="قدّمت نتائج الرصد الحية عبر واجهات Flask وNode.js البرمجية إلى واجهة React على AWS.">Served live detections through Flask and Node.js APIs to a React front end on AWS.</li>
         </ul>
-        <ul class="chips" aria-label="Tech used"><li class="chip" data-t="ai">Python</li><li class="chip" data-t="ai">YOLO</li><li class="chip" data-t="be">Flask</li><li class="chip" data-t="cl">AWS EC2</li></ul>
+        <ul class="chips" aria-label="Tech used" data-ar-label="التقنيات المستخدمة"><li class="chip" data-t="ai">Python</li><li class="chip" data-t="ai">YOLO</li><li class="chip" data-t="be">Flask</li><li class="chip" data-t="cl">AWS EC2</li></ul>
       </article>
     </div>
 
-    <p class="note">These are client and company products, so their code lives in private repos. Some links lead to the company's commercial site rather than the product itself, because the products are under NDA and not public yet. Open source: <a href="https://github.com/agentvivekkumar/dontbemichael/pull/369" target="_blank" rel="noopener">dontbemichael #369</a>, per-column empty states for a multi-agent desktop app.</p>
+    <p class="note" data-ar="هذه منتجات لعملاء وشركات، لذا فإن شيفرتها في مستودعات خاصة. بعض الروابط تقود إلى الموقع التجاري للشركة بدلًا من المنتج نفسه، لأن المنتجات تخضع لاتفاقيات عدم إفصاح ولم تُطرح للعامة بعد. مساهمة مفتوحة المصدر: &lt;a href=&quot;https://github.com/agentvivekkumar/dontbemichael/pull/369&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;dontbemichael #369&lt;/a&gt;، حالات فارغة لكل عمود في تطبيق سطح مكتب متعدد الوكلاء.">These are client and company products, so their code lives in private repos. Some links lead to the company's commercial site rather than the product itself, because the products are under NDA and not public yet. Open source: <a href="https://github.com/agentvivekkumar/dontbemichael/pull/369" target="_blank" rel="noopener">dontbemichael #369</a>, per-column empty states for a multi-agent desktop app.</p>
   </section>
 
   <section id="experience">
-    <div class="sec-head"><h2>Where I've worked</h2></div>
+    <div class="sec-head"><h2 data-ar="الخبرة العملية">Where I've worked</h2></div>
     <div class="timeline">
       <div class="row">
-        <p class="when">Oct 2023 to now</p>
+        <p class="when" data-ar="أكتوبر 2023 حتى الآن">Oct 2023 to now</p>
         <div>
-          <h3>Software Developer (Full-Stack)</h3>
-          <p class="org">Julfar Consultancy Services, Ras Al Khaimah, UAE</p>
-          <p class="desc">Own features end to end across frontend, backend and AI layers on three production platforms, with teams of 7+ engineers.</p>
+          <h3 data-ar="مطوّر برمجيات (Full-Stack)">Software Developer (Full-Stack)</h3>
+          <p class="org" data-ar="جلفار للخدمات الاستشارية، رأس الخيمة، الإمارات">Julfar Consultancy Services, Ras Al Khaimah, UAE</p>
+          <p class="desc" data-ar="أتولّى تطوير الميزات من البداية إلى النهاية عبر الواجهة الأمامية والخلفية وطبقات الذكاء الاصطناعي في ثلاث منصات قيد التشغيل، ضمن فرق تضم أكثر من 7 مهندسين.">Own features end to end across frontend, backend and AI layers on three production platforms, with teams of 7+ engineers.</p>
         </div>
       </div>
       <div class="row">
-        <p class="when">Sep 2021 to Jan 2022</p>
+        <p class="when" data-ar="سبتمبر 2021 حتى يناير 2022">Sep 2021 to Jan 2022</p>
         <div>
-          <h3>AI Engineering Intern</h3>
+          <h3 data-ar="متدرّب في هندسة الذكاء الاصطناعي">AI Engineering Intern</h3>
           <p class="org">Samsung Innovation Campus</p>
-          <p class="desc">Machine learning and deep learning for computer vision with Python and TensorFlow. Finished in the top 3 of the cohort.</p>
+          <p class="desc" data-ar="تعلّم الآلة والتعلّم العميق للرؤية الحاسوبية باستخدام Python وTensorFlow. ضمن أفضل 3 في الدفعة.">Machine learning and deep learning for computer vision with Python and TensorFlow. Finished in the top 3 of the cohort.</p>
         </div>
       </div>
       <div class="row">
-        <p class="when">Education</p>
+        <p class="when" data-ar="التعليم">Education</p>
         <div>
-          <h3>B.Sc. Software Engineering</h3>
-          <p class="org">Cairo University, Faculty of Computers and Artificial Intelligence</p>
-          <p class="desc">GPA 3.47, with honors, ranked 6th.</p>
+          <h3 data-ar="بكالوريوس هندسة البرمجيات">B.Sc. Software Engineering</h3>
+          <p class="org" data-ar="جامعة القاهرة، كلية الحاسبات والذكاء الاصطناعي">Cairo University, Faculty of Computers and Artificial Intelligence</p>
+          <p class="desc" data-ar="معدل تراكمي 3.47 مع مرتبة الشرف، والترتيب السادس على الدفعة.">GPA 3.47, with honors, ranked 6th.</p>
         </div>
       </div>
       <div class="row">
-        <p class="when">Certifications</p>
+        <p class="when" data-ar="الشهادات">Certifications</p>
         <ul class="certs">
           <li>AWS Certified Cloud Practitioner</li>
           <li>ISTQB Certified AI Tester <span>(CT-AI)</span></li>
@@ -547,43 +755,43 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
   </section>
 
   <section id="stack">
-    <div class="sec-head"><h2>What I work with</h2></div>
+    <div class="sec-head"><h2 data-ar="الأدوات التي أعمل بها">What I work with</h2></div>
     <div class="tools">
-      <div class="tool-row" data-t="fe"><h3><span class="tdot"></span>Frontend</h3><ul class="chips"><li class="chip">React</li><li class="chip">Next.js</li><li class="chip">Angular</li><li class="chip">React Native</li><li class="chip">TypeScript</li><li class="chip">Tailwind</li></ul></div>
-      <div class="tool-row" data-t="fe"><h3><span class="tdot"></span>UI libraries</h3><ul class="chips"><li class="chip">ShadCN</li><li class="chip">Spartan UI</li><li class="chip">PrimeNG</li><li class="chip">Angular Material</li><li class="chip">Bootstrap</li></ul></div>
-      <div class="tool-row" data-t="be"><h3><span class="tdot"></span>Backend and data</h3><ul class="chips"><li class="chip">Node.js</li><li class="chip">.NET</li><li class="chip">Python</li><li class="chip">PostgreSQL</li><li class="chip">MongoDB</li></ul></div>
-      <div class="tool-row" data-t="ai"><h3><span class="tdot"></span>AI</h3><ul class="chips"><li class="chip">OpenAI</li><li class="chip">Anthropic</li><li class="chip">multi-agent orchestration</li><li class="chip">tool calling</li><li class="chip">structured outputs</li><li class="chip">RAG</li><li class="chip">evals</li><li class="chip">MCP</li><li class="chip">prompt and context engineering</li></ul></div>
-      <div class="tool-row" data-t="cl"><h3><span class="tdot"></span>Cloud</h3><ul class="chips"><li class="chip">AWS</li><li class="chip">Docker</li><li class="chip">Cloudflare</li><li class="chip">CI/CD</li></ul></div>
+      <div class="tool-row" data-t="fe"><h3 data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;الواجهة الأمامية"><span class="tdot"></span>Frontend</h3><ul class="chips"><li class="chip">React</li><li class="chip">Next.js</li><li class="chip">Angular</li><li class="chip">React Native</li><li class="chip">TypeScript</li><li class="chip">Tailwind</li></ul></div>
+      <div class="tool-row" data-t="fe"><h3 data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;مكتبات الواجهات"><span class="tdot"></span>UI libraries</h3><ul class="chips"><li class="chip">ShadCN</li><li class="chip">Spartan UI</li><li class="chip">PrimeNG</li><li class="chip">Angular Material</li><li class="chip">Bootstrap</li></ul></div>
+      <div class="tool-row" data-t="be"><h3 data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;الخلفية والبيانات"><span class="tdot"></span>Backend and data</h3><ul class="chips"><li class="chip">Node.js</li><li class="chip">.NET</li><li class="chip">Python</li><li class="chip">PostgreSQL</li><li class="chip">MongoDB</li></ul></div>
+      <div class="tool-row" data-t="ai"><h3 data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;الذكاء الاصطناعي"><span class="tdot"></span>AI</h3><ul class="chips"><li class="chip">OpenAI</li><li class="chip">Anthropic</li><li class="chip">multi-agent orchestration</li><li class="chip">tool calling</li><li class="chip">structured outputs</li><li class="chip">RAG</li><li class="chip">evals</li><li class="chip">MCP</li><li class="chip">prompt and context engineering</li></ul></div>
+      <div class="tool-row" data-t="cl"><h3 data-ar="&lt;span class=&quot;tdot&quot;&gt;&lt;/span&gt;السحابة"><span class="tdot"></span>Cloud</h3><ul class="chips"><li class="chip">AWS</li><li class="chip">Docker</li><li class="chip">Cloudflare</li><li class="chip">CI/CD</li></ul></div>
     </div>
     <div class="own">
-      <h3>In my own work</h3>
-      <p>Coding agents are part of my daily setup. I use Claude Code and Copilot for architecture review, debugging and implementation, with MCP servers giving them real project context, and I treat what they produce like any other code that needs review.</p>
+      <h3 data-ar="في عملي اليومي">In my own work</h3>
+      <p data-ar="وكلاء البرمجة جزء من بيئة عملي اليومية. أستخدم Claude Code وCopilot لمراجعة المعمارية وتتبّع الأخطاء والتنفيذ، مع خوادم MCP تمنحهم سياق المشروع الفعلي، وأتعامل مع ما ينتجونه كأي شيفرة أخرى تحتاج إلى مراجعة.">Coding agents are part of my daily setup. I use Claude Code and Copilot for architecture review, debugging and implementation, with MCP servers giving them real project context, and I treat what they produce like any other code that needs review.</p>
     </div>
   </section>
 
   <section id="contact">
-    <div class="sec-head"><h2>Let's talk</h2></div>
+    <div class="sec-head"><h2 data-ar="لنتحدث">Let's talk</h2></div>
     <div class="contact">
-      <p>I'm open to full-stack and AI engineering work, full-time or freelance, remote or on-site. Email, LinkedIn or WhatsApp all reach me.</p>
+      <p data-ar="أنا متاح لأعمال Full-Stack وهندسة الذكاء الاصطناعي، بدوام كامل أو كمستقل، عن بُعد أو من المكتب. يمكنك التواصل معي عبر البريد الإلكتروني أو LinkedIn أو WhatsApp.">I'm open to full-stack and AI engineering work, full-time or freelance, remote or on-site. Email, LinkedIn or WhatsApp all reach me.</p>
       <div class="channels">
         <div class="channel">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-          <span class="txt"><span class="lbl">Email</span><span class="val" id="addr">abdullahhassan436@gmail.com</span></span>
-          <span class="act"><button class="btn small" id="copy" type="button">Copy</button><span class="copied" id="copied" aria-live="polite"></span></span>
+          <span class="txt"><span class="lbl" data-ar="البريد الإلكتروني">Email</span><span class="val" id="addr" dir="ltr">abdullahhassan436@gmail.com</span></span>
+          <span class="act"><button class="btn small" id="copy" type="button" data-ar="نسخ">Copy</button><span class="copied" id="copied" aria-live="polite"></span></span>
         </div>
         <a class="channel" href="https://www.linkedin.com/in/abdallahhhassan/" target="_blank" rel="noopener">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span>
-          <span class="txt"><span class="lbl">LinkedIn</span><span class="val">linkedin.com/in/abdallahhhassan</span></span>
-          <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          <span class="txt"><span class="lbl">LinkedIn</span><span class="val" dir="ltr">linkedin.com/in/abdallahhhassan</span></span>
+          <svg class="go flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
         </a>
         <a class="channel" href="https://wa.me/201552087500" target="_blank" rel="noopener">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.5 9.5c.3 1.6 1.4 3 3 3.8l1-1 2 1v1.2a1 1 0 0 1-1.1 1A6.5 6.5 0 0 1 8.3 9.6a1 1 0 0 1 1-1.1h1.2l1 2z"/></svg></span>
-          <span class="txt"><span class="lbl">WhatsApp</span><span class="val">+20 155 208 7500</span></span>
-          <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          <span class="txt"><span class="lbl">WhatsApp</span><span class="val" dir="ltr">+20 155 208 7500</span></span>
+          <svg class="go flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
         </a>
         <a class="channel" href="Abdallah_Hassan_CV.pdf" download="Abdallah_Hassan_CV.pdf">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9.5 14.5 12 17l2.5-2.5"/></svg></span>
-          <span class="txt"><span class="lbl">CV</span><span class="val">Download PDF, one page</span></span>
+          <span class="txt"><span class="lbl" data-ar="السيرة الذاتية">CV</span><span class="val" data-ar="تحميل ملف PDF، صفحة واحدة">Download PDF, one page</span></span>
           <svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v13M7 12l5 5 5-5"/></svg>
         </a>
       </div>
@@ -593,12 +801,57 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 Abdallah Hassan</span>
-    <a href="#top">Back to top</a>
+    <span data-ar="© 2026 عبدالله حسن">© 2026 Abdallah Hassan</span>
+    <a href="#top" data-ar="العودة للأعلى">Back to top</a>
   </div>
 </footer>
 
 <script>
+  // English and Arabic. Elements carry their Arabic in data-ar; the English is kept
+  // aside the first time it is swapped out. ?lang=ar links straight to Arabic.
+  (function () {
+    var root = document.documentElement, btn = document.getElementById('lang');
+    var UI = {
+      'Ready': 'جاهز', 'Sending an input': 'إرسال المُدخل', 'Agent step is calling the model': 'خطوة الوكيل تستدعي النموذج',
+      'Checking the output against the schema and rules': 'التحقق من المخرجات وفق المخطط والقواعد',
+      'Passed. Run it again to see a failed check.': 'نجح التحقق. شغّله مرة أخرى لترى تحققًا فاشلًا.',
+      'Passed, so the output moved on.': 'نجح التحقق، فانتقلت المخرجات إلى الخطوة التالية.',
+      'Check failed, so it took the fallback route.': 'فشل التحقق، فسلك المسار البديل.',
+      'Copied': 'تم النسخ', 'Selected': 'تم التحديد',
+      'Pause animation': 'إيقاف الحركة مؤقتًا', 'Play animation': 'تشغيل الحركة',
+      'Switch to dark mode': 'التبديل إلى الوضع الداكن', 'Switch to light mode': 'التبديل إلى الوضع الفاتح'
+    };
+    window.T = function (en) { return root.lang === 'ar' && UI[en] ? UI[en] : en; };
+    var hooks = [];
+    window.onLang = function (fn) { hooks.push(fn); };
+    function apply(l) {
+      var ar = l === 'ar';
+      root.lang = ar ? 'ar' : 'en'; root.dir = ar ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-ar]').forEach(function (el) {
+        if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+        el.innerHTML = ar ? el.dataset.ar : el.dataset.en;
+      });
+      document.querySelectorAll('[data-ar-label]').forEach(function (el) {
+        if (el.dataset.enLabel === undefined) el.dataset.enLabel = el.getAttribute('aria-label');
+        el.setAttribute('aria-label', ar ? el.dataset.arLabel : el.dataset.enLabel);
+      });
+      document.title = ar ? 'عبدالله حسن' : 'Abdallah Hassan';
+      btn.innerHTML = ar ? '<span lang="en">EN</span>' : '<span lang="ar">ع</span>';
+      btn.setAttribute('aria-label', ar ? 'عرض الصفحة بالإنجليزية' : 'View this page in Arabic');
+      hooks.forEach(function (fn) { fn(); });
+    }
+    btn.addEventListener('click', function () {
+      var l = root.lang === 'ar' ? 'en' : 'ar';
+      root.classList.add('theme-anim');
+      clearTimeout(window.__langT);
+      window.__langT = setTimeout(function () { root.classList.remove('theme-anim'); }, 500);
+      apply(l);
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      try { history.replaceState(null, '', (l === 'ar' ? '?lang=ar' : location.pathname) + location.hash); } catch (e) {}
+    });
+    if (root.lang === 'ar') apply('ar');
+  })();
+
   // Copy the email address, falling back to selecting it.
   document.getElementById('copy').addEventListener('click', function () {
     var text = document.getElementById('addr').textContent;
@@ -606,12 +859,14 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
     function selectIt() {
       var r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      out.textContent = 'Selected';
+      out.dataset.key = 'Selected'; out.textContent = T('Selected');
     }
     try {
-      navigator.clipboard.writeText(text).then(function () { out.textContent = 'Copied'; }, selectIt);
+      navigator.clipboard.writeText(text).then(function () { out.dataset.key = 'Copied'; out.textContent = T('Copied'); }, selectIt);
     } catch (e) { selectIt(); }
   });
+
+  onLang(function () { var o = document.getElementById('copied'); if (o.dataset.key) o.textContent = T(o.dataset.key); });
 
   // Light and dark mode toggle, remembered per visitor.
   (function () {
@@ -621,7 +876,7 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
     function sync() {
       var d = isDark();
       btn.dataset.mode = d ? 'dark' : 'light';
-      btn.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('aria-label', T(d ? 'Switch to light mode' : 'Switch to dark mode'));
     }
     btn.addEventListener('click', function () {
       var t = isDark() ? 'light' : 'dark';
@@ -633,6 +888,7 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
       sync();
     });
     if (mq.addEventListener) mq.addEventListener('change', sync);
+    onLang(sync);
     sync();
   })();
 
@@ -710,7 +966,26 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
       var offset = id === '#top' ? 0 : document.getElementById('bar').offsetHeight + 8;
       go(id === '#top' ? 0 : el.getBoundingClientRect().top + window.scrollY - offset);
       history.replaceState(null, '', id);
+      var f = id === '#top' ? document.getElementById('top') : el;
+      if (!f.hasAttribute('tabindex')) f.setAttribute('tabindex', '-1');
+      f.focus({ preventScroll: true });
     });
+  })();
+
+  // Project diagrams animate only while they are on screen, and each can be paused.
+  (function () {
+    var figs = document.querySelectorAll('.viz');
+    figs.forEach(function (f) {
+      var b = f.querySelector('.viz-pause');
+      function label() { var p = f.classList.contains('paused'); b.setAttribute('aria-pressed', p ? 'true' : 'false'); b.setAttribute('aria-label', T(p ? 'Play animation' : 'Pause animation')); }
+      b.addEventListener('click', function () { f.classList.toggle('paused'); label(); });
+      onLang(label); label();
+    });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.classList.toggle('play', e.isIntersecting); });
+    }, { threshold: 0.25 });
+    figs.forEach(function (f) { io.observe(f); });
   })();
 
   // The hero workflow: drag nodes to rearrange them, press Run to send an input through.
@@ -778,7 +1053,7 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var token = document.getElementById('token'), statusEl = document.getElementById('status'), runBtn = document.getElementById('run');
     var runs = 0, running = false;
-    function status(text, tone) { statusEl.textContent = text; if (tone) statusEl.dataset.tone = tone; else delete statusEl.dataset.tone; }
+    function status(text, tone) { statusEl.dataset.key = text; statusEl.textContent = T(text); if (tone) statusEl.dataset.tone = tone; else delete statusEl.dataset.tone; }
     function wait(ms) { return new Promise(function (r) { setTimeout(r, reduced ? Math.min(ms, 250) : ms); }); }
     function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     function travel(edge, cls) {
@@ -828,6 +1103,8 @@ a.channel:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -14px rgba
       });
     }
     runBtn.addEventListener('click', run);
+    statusEl.dataset.key = 'Ready'; statusEl.textContent = T('Ready');
+    onLang(function () { statusEl.textContent = T(statusEl.dataset.key || 'Ready'); });
 
     // Run once on its own the first time the editor is on screen.
     if (!reduced && 'IntersectionObserver' in window) {
